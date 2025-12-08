@@ -1,0 +1,125 @@
+<!-- Authentication Modal -->
+<div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="authModalLabel">Join Our Community</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Role Selection -->
+                <div class="mb-4">
+                    <label class="form-label fw-bold">I want to join as:</label>
+                    <div class="btn-group w-100" role="group">
+                        <input type="radio" class="btn-check" name="role" id="role_student" value="student" checked>
+                        <label class="btn btn-outline-primary" for="role_student">
+                            <i class="fas fa-book me-2"></i> Student
+                        </label>
+
+                        <input type="radio" class="btn-check" name="role" id="role_mentor" value="mentor">
+                        <label class="btn btn-outline-primary" for="role_mentor">
+                            <i class="fas fa-chalkboard-user me-2"></i> Mentor
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Login Form -->
+                <div id="loginForm">
+                    <h6 class="mb-3">Login</h6>
+                    <form id="form-login">
+                        <div class="mb-3">
+                            <label for="login_email" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="login_email" name="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="login_password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="login_password" name="password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 mb-2">Login</button>
+                        <button type="button" class="btn btn-link w-100 text-decoration-none" id="switchToRegister">
+                            Don't have an account? Register here
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Register Form -->
+                <div id="registerForm" style="display: none;">
+                    <h6 class="mb-3">Create Account</h6>
+                    <form id="form-register">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="register_first_name" class="form-label">First Name</label>
+                                <input type="text" class="form-control" id="register_first_name" name="first_name"
+                                    required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="register_last_name" class="form-label">Last Name</label>
+                                <input type="text" class="form-control" id="register_last_name" name="last_name"
+                                    required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="register_email" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="register_email" name="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="register_phone" class="form-label">Phone Number</label>
+                            <input type="tel" class="form-control" id="register_phone" name="phone_number" required>
+                        </div>
+                        <div id="mentor_expertise" class="mb-3" style="display: none;">
+                            <label for="register_expertise" class="form-label">Area of Expertise</label>
+                            <input type="text" class="form-control" id="register_expertise" name="expertise"
+                                placeholder="e.g., Mathematics, Science, etc.">
+                        </div>
+                        <div class="mb-3">
+                            <label for="register_password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="register_password" name="password" required
+                                minlength="6">
+                            <small class="text-muted">Minimum 6 characters</small>
+                        </div>
+                        <div class="mb-3">
+                            <label for="register_confirm_password" class="form-label">Confirm Password</label>
+                            <input type="password" class="form-control" id="register_confirm_password"
+                                name="confirm_password" required minlength="6">
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 mb-2">Create Account</button>
+                        <button type="button" class="btn btn-link w-100 text-decoration-none" id="switchToLogin">
+                            Already have an account? Login here
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Messages -->
+                <div id="authMessage" class="mt-3" role="alert" style="display: none;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    #authModal .modal-content {
+        border: none;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    #authModal .form-control:focus,
+    #authModal .btn-check:focus+.btn {
+        border-color: #0d6efd;
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    }
+
+    #authMessage.alert {
+        margin-top: 1rem;
+    }
+
+    .btn-group label {
+        cursor: pointer;
+        padding: 0.75rem 1.5rem;
+        font-weight: 500;
+    }
+
+    .btn-group .btn-check:checked+label {
+        background-color: #0d6efd;
+        color: white;
+    }
+</style>

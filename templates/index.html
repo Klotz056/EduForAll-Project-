@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="utf-8">
+    <title>EduForAll</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+    <link rel="shortcut icon" href="assets/svg/logo.svg" type="image/x-icon">
+
+    <!-- Favicon -->
+    <link href="{% static 'img/favicon.ico' %}" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="{% static 'lib/animate/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Spinner Start -->
+    <div id="spinner"
+        class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+
+
+    <!-- Navbar Start -->
+    {% include 'navbar.html' %}
+
+
+    <!-- Navbar End -->
+
+
+    <!-- Carousel Start -->
+    <section id="index.html">
+        <div class="container-fluid p-0 mb-5 ">
+            <div class="owl-carousel header-carousel position-relative">
+                <div class="owl-carousel-item position-relative">
+                    <!-- <img class="img-fluid" src="{% static 'img/carousel-1.jpg' %}" alt=""> -->
+                    <img class="img-fluid carousel-img"
+                        src="https://media.istockphoto.com/id/1770759657/photo/black-and-mixed-race-student-using-digital-tablets-in-mathematics-class.jpg?s=612x612&w=0&k=20&c=DtKYKp2GhW69-0Hf7bTpe0uvgXoA00hgfwDnFrlQ3Xs="
+                        alt="">
+                    <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center"
+                        style="background: rgba(24, 29, 56, .7);">
+                        <div class="container">
+                            <div class="row justify-content-start">
+                                <div class="col-sm-10 col-lg-8">
+                                    <h5 class="text-primary text-uppercase mb-3 animated slideInDown">Education For All
+                                    </h5>
+                                    <h3 class="display-3 text-white animated slideInDown">Unlocking Tech Education
+                                        for Everyone
+                                    </h3>
+                                    <p class="fs-5 text-white mb-4 pb-2">EduForAll is a digital portal dedicated to
+                                        providing accessible, inclusive, and high-quality educational resources for
+                                        learners, educators, and communities across Kenya and beyond.</p>
+                                    <a href="{% url 'readmore' %}"
+                                        class="btn btn-dark py-md-3 px-md-5 me-3 animated slideInLeft rounded-3">Read
+                                        More</a>
+                                    <a href="{% url 'login' %}"
+                                        class="btn btn-dark py-md-3 px-md-5 animated slideInRight rounded-3">Join
+                                        Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="owl-carousel-item position-relative">
+                    <!-- <img class="img-fluid" src="{% static 'img/carousel-2.jpg' %}" alt=""> -->
+                    <img class="img-fluid carousel-img"
+                        src="https://media.istockphoto.com/id/1770760349/photo/schoolboy-using-digital-tablet-for-mathematics-while-classmates-write-in-exercise-book.jpg?s=612x612&w=0&k=20&c=YrqFokNL3sDjamkquhcoAu3CaCaoyFOG-Z7_z2nH3pU="
+                        alt="">
+                    <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center"
+                        style="background: rgba(24, 29, 56, .7);">
+                        <div class="container">
+                            <div class="row justify-content-start">
+                                <div class="col-sm-10 col-lg-8">
+                                    <h5 class="text-primary text-uppercase mb-3 animated slideInDown">Elimu Kwa Wote
+                                    </h5>
+                                    <h3 class="display-3 text-white animated slideInDown">Discover Free Learning
+                                        Resources
+                                    </h3>
+                                    <p class="fs-5 text-white mb-4 pb-2">Step-by-step lessons in Data Science,
+                                        Cyber Security, AI, Web Development & Cloud Computing with practical
+                                        exercises.
+                                        Access free coding resources to enhance digital skills.
+                                    </p>
+                                    <a href="{% url 'readmore' %}"
+                                        class="btn btn-dark py-md-3 px-md-5 me-3 animated slideInLeft rounded-3">Read
+                                        More</a>
+                                    <a href="{% url 'login' %}"
+                                        class="btn btn-dark py-md-3 px-md-5 animated slideInRight rounded-3">Join
+                                        Now</a>
+
+
+                                    <!-- <a href="javascript:void(0)" onclick="openAuthModal()"
+                                        class="btn btn-dark py-md-3 px-md-5 animated slideInRight rounded-3">Join
+                                        Now</a> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Carousel End -->
+    <hr>
+
+    <!-- Service Start -->
+    <div class="container-xxl py-5">
+        <div class="container bg-dark rounded-3 py-5 px-4">
+            <div class="row g-4">
+                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <!-- <a href="{% url 'instructor' %}"> -->
+                    <div class="service-item text-center pt-3">
+                        <div class="p-4">
+                            <i class="fa fa-3x fa-graduation-cap text-dark mb-4 "></i>
+                            <h5 class="mb-3">Skilled Instructors</h5>
+                            <p>Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
+                        </div>
+                        <a href="{% url 'instructor' %}"
+                            class="btn btn-dark py-md-3 px-md-5 me-3 mb-3 animated slideInLeft rounded-3">View
+                        </a>
+                    </div>
+
+                </div>
+                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="service-item text-center pt-3">
+                        <div class="p-4">
+                            <i class="fa fa-3x fa-globe text-dark mb-4"></i>
+                            <h5 class="mb-3">Online Classes</h5>
+                            <p>Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
+                        </div>
+                        <a href="{% url 'classes' %}"
+                            class="btn btn-dark py-md-3 px-md-5 me-3 mb-3 animated slideInLeft rounded-3">View
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="service-item text-center pt-3">
+                        <div class="p-4">
+                            <i class="fa fa-3x fa-home text-dark mb-4"></i>
+                            <h5 class="mb-3">Certifications</h5>
+                            <p>Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
+                        </div>
+                        <a href="{% url 'certificate' %}"
+                            class="btn btn-dark py-md-3 px-md-5 me-3 mb-3 animated slideInLeft rounded-3">View
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
+                    <div class="service-item text-center pt-3">
+                        <div class="p-4">
+                            <i class="fa fa-3x fa-book-open text-dark mb-4"></i>
+                            <h5 class="mb-3">Book Library</h5>
+                            <p>Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
+                        </div>
+                        <a href="{% url 'books' %}"
+                            class="btn btn-dark py-md-3 px-md-5 me-3 mb-3 animated slideInLeft rounded-3">View
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Service End -->
+    <hr>
+
+    <!-- About Start -->
+    <section id="about.html">
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div class="row g-5">
+                    <div class="container my-3 text-center">
+                        <h4 class="section-title bg-white text-start text-dark pe-3 py-0">About EduForAll</h4>
+                    </div>
+                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s" style="min-height: 400px;">
+                        <div class="position-relative h-100">
+                            <!-- <img class="img-fluid position-absolute w-100 h-100" src="{% static 'img/about.jpg' %}" -->
+                            <img class="img-fluid position-absolute w-100 h-100"
+                                src="https://img.freepik.com/free-photo/about-us-information-service-sharing-join-concept_53876-124056.jpg"
+                                alt="" style="object-fit: cover;">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
+                        <!-- <h6 class="section-title bg-white text-start text-dark pe-3">About EduForAll</h6> -->
+                        <h1 class="mb-4">Welcome to EduForAll</h1>
+                        <p class="mb-4">Through innovative digital solutions, EduForAll delivers open educational
+                            resources
+                            that connect learners and educators, ensuring equitable access to knowledge across
+                            communities.
+                        </p>
+                        <div class="row gy-2 gx-4 mb-4">
+                            <div class="col-sm-6">
+                                <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Skilled Instructors
+                                </p>
+                            </div>
+                            <div class="col-sm-6">
+                                <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Online Classes</p>
+                            </div>
+                            <div class="col-sm-6">
+                                <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Certifications
+                                </p>
+                            </div>
+                            <div class="col-sm-6">
+                                <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Industry Skills</p>
+                            </div>
+                            <div class="col-sm-6">
+                                <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Learning Resources
+                                </p>
+                            </div>
+                            <div class="col-sm-6">
+                                <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Book Library
+                                </p>
+                            </div>
+                        </div>
+                        <a class="btn btn-dark py-3 px-5 mt-2 rounded-3" href="{% url 'readmore' %}">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- About End -->
+    <hr>
+
+    <!-- Categories Start -->
+    <section id="courses.html">
+        <div class="container-xxl py-5 category">
+            <div class="container">
+                <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                    <h6 class="section-title bg-white text-center text-primary px-3">Categories</h6>
+                    <h1 class="mb-5">Explore Our Courses Categories</h1>
+                </div>
+                <div class="row g-3">
+                    <div class="col-lg-7 col-md-6">
+                        <div class="row g-3">
+                            <div class="col-lg-12 col-md-12 wow zoomIn" data-wow-delay="0.1s">
+                                <a class="position-relative d-block overflow-hidden" href="{% url 'classes' %}">
+
+                                    <img class="img-fluid"
+                                        src="https://media.gettyimages.com/id/1770728228/photo/girl-student-learning-to-use-desktop-pc-at-computer-class-in-school.jpg?s=612x612&w=0&k=20&c=xtbriIWTMSgrTvZ7FhjK144A4O6Yv8Tp12Ez2VxFzrM="
+                                        alt="">
+
+                                    <div class="bg-white text-center position-absolute bottom-0 end-0 py-2 px-3"
+                                        style="margin: 1px;">
+
+                                        <h5 class="m-0">Web Development</h5>
+
+                                        <small class="text-primary">12 Courses</small>
+                                        <!-- <a href="{% url 'classes' %}"><button class="bg-dark">Click</button></a> -->
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-lg-6 col-md-12 wow zoomIn" data-wow-delay="0.3s">
+                                <a class="position-relative d-block overflow-hidden" href="{% url 'classes' %}">
+                                    <img class="img-fluid"
+                                        src="https://media.gettyimages.com/id/2187877058/photo/teacher-girl-and-laptop-for-e-learning-in-library-with-education-support-information-and.jpg?s=612x612&w=0&k=20&c=nn4I4J60cM7W_2PNQsKFQxunuGOl0MmrWfA1OaCfK2E="
+                                        alt="">
+                                    <div class="bg-white text-center position-absolute bottom-0 end-0 py-2 px-3"
+                                        style="margin: 1px;">
+                                        <h5 class="m-0">Cyber Security</h5>
+                                        <small class="text-primary">40 Courses</small>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-lg-6 col-md-12 wow zoomIn" data-wow-delay="0.5s">
+                                <a class="position-relative d-block overflow-hidden" href="{% url 'classes' %}">
+                                    <!-- <img class="img-fluid" src="{% static 'img/cat-3.jpg' %}" alt=""> -->
+                                    <img class="img-fluid"
+                                        src="https://media.gettyimages.com/id/2148731713/photo/happy-teenage-girl-using-smart-phone-while-sitting-with-friends.jpg?s=612x612&w=0&k=20&c=ZcF7YB6YqaMU7sJvqwd9p63kxg2Il75aQRlj9pdm0XY="
+                                        alt="">
+
+                                    <div class="bg-white text-center position-absolute bottom-0 end-0 py-2 px-3"
+                                        style="margin: 1px;">
+                                        <h5 class="m-0">Cloud Computing</h5>
+                                        <small class="text-primary">15 Courses</small>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 col-md-6 wow zoomIn" data-wow-delay="0.7s" style="min-height: 350px;">
+                        <a class="position-relative d-block h-100 overflow-hidden" href="{% url 'classes' %}">
+                            <img class="img-fluid position-absolute w-100 h-100"
+                                src="https://media.gettyimages.com/id/1171003985/photo/male-teacher-explaining-female-student-at-desk.jpg?s=612x612&w=0&k=20&c=XJaMZF-h-mpr8_DkCCZ5NIAeXQh9t6aQjYDKGJc4hXg="
+                                alt="" style="object-fit: cover;">
+                            <div class="bg-white text-center position-absolute bottom-0 end-0 py-2 px-3"
+                                style="margin:  1px;">
+                                <h5 class="m-0">Data Science</h5>
+                                <small class="text-primary">30 Courses</small>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Categories Start -->
+    <hr>
+
+    <!-- Courses Start Popular courses -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                <h6 class="section-title bg-white text-center text-primary px-3">Courses</h6>
+                <h1 class="mb-5">Popular Courses</h1>
+            </div>
+            <div class="row g-4 justify-content-center">
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="course-item bg-light">
+                        <div class="position-relative overflow-hidden">
+                            <img class="img-fluid"
+                                src="https://media.gettyimages.com/id/547014185/photo/students-in-the-computer-science-class-cape-town-south-africa.jpg?s=612x612&w=0&k=20&c=skBKA4HeV9UFJi0U_sk586Z8wyUkDkFEPqtCtoMye84="
+                                alt="">
+                            <div class="w-100 d-flex justify-content-center position-absolute bottom-0 start-0 mb-4">
+                                <a href="#" class="flex-shrink-0 btn btn-sm btn-info px-3 border-end"
+                                    style="border-radius: 30px 0 0 30px;">Read More</a>
+                                <a href="javascript:void(0)" onclick="openAuthModal()"
+                                    class="flex-shrink-0 btn btn-sm btn-info px-3"
+                                    style="border-radius: 0 30px 30px 0;">Join Now</a>
+                            </div>
+                        </div>
+                        <div class="text-center p-4 pb-0">
+                            <h3 class="mb-0">Ksh.51,410.00</h3>
+                            <div class="mb-3">
+                                <small class="fa fa-star text-primary"></small>
+                                <small class="fa fa-star text-primary"></small>
+                                <small class="fa fa-star text-primary"></small>
+                                <small class="fa fa-star text-primary"></small>
+                                <small class="fa fa-star text-primary"></small>
+                                <small>(432)</small>
+                            </div>
+                            <h5 class="mb-4">Web Development Course for beginners</h5>
+                        </div>
+                        <div class="d-flex border-top">
+                            <small class="flex-fill text-center border-end py-2"><i
+                                    class="fa fa-user-tie text-primary me-2"></i>Maxwell Gogo</small>
+                            <small class="flex-fill text-center border-end py-2"><i
+                                    class="fa fa-clock text-primary me-2"></i>2.49 Hrs</small>
+                            <small class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-2"></i>47
+                                Students</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="course-item bg-light">
+                        <div class="position-relative overflow-hidden">
+                            <img class="img-fluid"
+                                src="https://media.gettyimages.com/id/659073051/photo/university-students-studying-in-classroom-school-bavaria-germany.jpg?s=612x612&w=0&k=20&c=T3lKafkRSeLxkH1tZfVTSuffPrMcm3BgKkEa8W0_WME="
+                                alt="">
+                            <div class="w-100 d-flex justify-content-center position-absolute bottom-0 start-0 mb-4">
+                                <a href="#" class="flex-shrink-0 btn btn-sm btn-info px-3 border-end"
+                                    style="border-radius: 30px 0 0 30px;">Read More</a>
+                                <a href="javascript:void(0)" onclick="openAuthModal()"
+                                    class="flex-shrink-0 btn btn-sm btn-info px-3"
+                                    style="border-radius: 0 30px 30px 0;">Join Now</a>
+                            </div>
+                        </div>
+                        <div class="text-center p-4 pb-0">
+                            <h3 class="mb-0">Ksh.86,490.00</h3>
+                            <div class="mb-3">
+                                <small class="fa fa-star text-primary"></small>
+                                <small class="fa fa-star text-primary"></small>
+                                <small class="fa fa-star text-primary"></small>
+                                <small class="fa fa-star text-primary"></small>
+                                <small class="fa fa-star text-primary"></small>
+                                <small>(153)</small>
+                            </div>
+                            <h5 class="mb-4">Data Science, Analytics & Analysis course for beginners</h5>
+                        </div>
+                        <div class="d-flex border-top">
+                            <small class="flex-fill text-center border-end py-2"><i
+                                    class="fa fa-user-tie text-primary me-2"></i></small>Isaac Tingo
+                            <small class="flex-fill text-center border-end py-2"><i
+                                    class="fa fa-clock text-primary me-2"></i>4.49 Hrs</small>
+                            <small class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-2"></i>30
+                                Students</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="course-item bg-light">
+                        <div class="position-relative overflow-hidden">
+                            <img class="img-fluid"
+                                src="https://media.gettyimages.com/id/547014181/photo/students-in-the-computer-science-class-cape-town-south-africa.jpg?s=612x612&w=0&k=20&c=pmlaF7LGJp5R9E-5MUIyy4yg_6p_pVQlaxKYv7tOjKM="
+                                alt="">
+                            <div class="w-100 d-flex justify-content-center position-absolute bottom-0 start-0 mb-4">
+                                <a href="#" class="flex-shrink-0 btn btn-sm btn-info px-3 border-end"
+                                    style="border-radius: 30px 0 0 30px;">Read More</a>
+                                <a href="javascript:void(0)" onclick="openAuthModal()"
+                                    class="flex-shrink-0 btn btn-sm btn-info px-3"
+                                    style="border-radius: 0 30px 30px 0;">Join Now</a>
+                            </div>
+                        </div>
+                        <div class="text-center p-4 pb-0">
+                            <h3 class="mb-0">Ksh.86,490.00</h3>
+                            <div class="mb-3">
+                                <small class="fa fa-star text-primary"></small>
+                                <small class="fa fa-star text-primary"></small>
+                                <small class="fa fa-star text-primary"></small>
+                                <small class="fa fa-star text-primary"></small>
+                                <small class="fa fa-star text-primary"></small>
+                                <small>(153)</small>
+                            </div>
+                            <h5 class="mb-4">Data Science, Analytics & Analysis course for beginners</h5>
+                        </div>
+                        <div class="d-flex border-top">
+                            <small class="flex-fill text-center border-end py-2"><i
+                                    class="fa fa-user-tie text-primary me-2"></i></small>Isaac Tingo
+                            <small class="flex-fill text-center border-end py-2"><i
+                                    class="fa fa-clock text-primary me-2"></i>4.49 Hrs</small>
+                            <small class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-2"></i>30
+                                Students</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Courses End -->
+
+
+        <!-- Team Start -->
+        <section id="team.html">
+            <div class="container-xxl py-5">
+                <div class="container">
+                    <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                        <h6 class="section-title bg-white text-center text-primary px-3">Instructors</h6>
+                        <h1 class="mb-5">Our Instructors</h1>
+                    </div>
+                    <div class="row g-4">
+                        <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                            <div class="team-item bg-light">
+                                <div class="overflow-hidden">
+                                    <img class="img-fluid" src="{% static 'img\instructors1.svg' %}" alt="">
+                                </div>
+                                <div class="position-relative d-flex justify-content-center" style="margin-top: -23px;">
+                                    <div class="bg-light d-flex justify-content-center pt-2 px-1">
+                                        <a class="btn btn-sm-square btn-primary mx-1" href=""><i
+                                                class="fab fa-facebook-f"></i></a>
+                                        <a class="btn btn-sm-square btn-primary mx-1" href=""><i
+                                                class="fab fa-twitter"></i></a>
+                                        <a class="btn btn-sm-square btn-primary mx-1" href=""><i
+                                                class="fab fa-instagram"></i></a>
+                                    </div>
+                                </div>
+                                <div class="text-center p-4">
+                                    <h5 class="mb-0">Steve Gogo</h5>
+                                    <small>Senior Trainer</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                            <div class="team-item bg-light">
+                                <div class="overflow-hidden">
+                                    <img class="img-fluid" src="{% static 'img\instructor2.svg' %}" alt="">
+                                </div>
+                                <div class="position-relative d-flex justify-content-center" style="margin-top: -23px;">
+                                    <div class="bg-light d-flex justify-content-center pt-2 px-1">
+                                        <a class="btn btn-sm-square btn-primary mx-1" href=""><i
+                                                class="fab fa-facebook-f"></i></a>
+                                        <a class="btn btn-sm-square btn-primary mx-1" href=""><i
+                                                class="fab fa-twitter"></i></a>
+                                        <a class="btn btn-sm-square btn-primary mx-1" href=""><i
+                                                class="fab fa-instagram"></i></a>
+                                    </div>
+                                </div>
+                                <div class="text-center p-4">
+                                    <h5 class="mb-0">Mavin Gogo</h5>
+                                    <small>Mentor</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                            <div class="team-item bg-light">
+                                <div class="overflow-hidden">
+                                    <img class="img-fluid" src="{% static 'img\instructors1.svg' %}" alt="">
+                                </div>
+                                <div class="position-relative d-flex justify-content-center" style="margin-top: -23px;">
+                                    <div class="bg-light d-flex justify-content-center pt-2 px-1">
+                                        <a class="btn btn-sm-square btn-primary mx-1" href=""><i
+                                                class="fab fa-facebook-f"></i></a>
+                                        <a class="btn btn-sm-square btn-primary mx-1" href=""><i
+                                                class="fab fa-twitter"></i></a>
+                                        <a class="btn btn-sm-square btn-primary mx-1" href=""><i
+                                                class="fab fa-instagram"></i></a>
+                                    </div>
+                                </div>
+                                <div class="text-center p-4">
+                                    <h5 class="mb-0">Isaac Tingo</h5>
+                                    <small>Instructor</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
+                            <div class="team-item bg-light">
+                                <div class="overflow-hidden">
+                                    <img class="img-fluid" src="{% static 'img\instructor2.svg' %}" alt="">
+                                </div>
+                                <div class="position-relative d-flex justify-content-center" style="margin-top: -23px;">
+                                    <div class="bg-light d-flex justify-content-center pt-2 px-1">
+                                        <a class="btn btn-sm-square btn-primary mx-1" href=""><i
+                                                class="fab fa-facebook-f"></i></a>
+                                        <a class="btn btn-sm-square btn-primary mx-1" href=""><i
+                                                class="fab fa-twitter"></i></a>
+                                        <a class="btn btn-sm-square btn-primary mx-1" href=""><i
+                                                class="fab fa-instagram"></i></a>
+                                    </div>
+                                </div>
+                                <div class="text-center p-4">
+                                    <h5 class="mb-0">Joan Mukura</h5>
+                                    <small>Instructor</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Team End -->
+
+
+        <!-- Testimonial Start -->
+        <section id="testimonial.html">
+            <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="container">
+                    <div class="text-center">
+                        <h6 class="section-title bg-white text-center text-primary px-3">Testimonial</h6>
+                        <h1 class="mb-5">Student Voices</h1>
+                    </div>
+                    <div class="owl-carousel testimonial-carousel position-relative">
+                        <div class="testimonial-item text-center">
+                            <img class="border rounded-circle p-2 mx-auto mb-3" src="{% static 'img\student1.svg' %}"
+                                style="width: 80px; height: 80px;">
+                            <h5 class="mb-0">Tabby Tamill</h5>
+                            <p>Data Science Learner</p>
+                            <div class="testimonial-text bg-light text-center p-4">
+                                <p class="mb-0">EduForAll gave me the confidence to code and collaborate.
+                                    The mentorship and resources helped me land my first internship.</p>
+                            </div>
+                        </div>
+                        <div class="testimonial-item text-center">
+                            <img class="border rounded-circle p-2 mx-auto mb-3" src="{% static 'img\student2.svg' %}"
+                                style="width: 80px; height: 80px;">
+                            <h5 class="mb-0">Lavin Gogo</h5>
+                            <p>Cyber Security Learner</p>
+                            <div class="testimonial-text bg-light text-center p-4">
+                                <p class="mb-0">I loved the hands-on approach. The instructors made complex topics
+                                    simple,
+                                    and I now feel ready to tackle real-world projects.</p>
+                            </div>
+                        </div>
+                        <div class="testimonial-item text-center">
+                            <img class="border rounded-circle p-2 mx-auto mb-3" src="{% static 'img\student3.svg' %}"
+                                style="width: 80px; height: 80px;">
+                            <h5 class="mb-0">Mavin Klotz</h5>
+                            <p>Cloud Computing Learner</p>
+                            <div class="testimonial-text bg-light text-center p-4">
+                                <p class="mb-0">The community support was amazing. I didn’t just learn skills,
+                                    I built friendships and networks that will last a lifetime.</p>
+                            </div>
+                        </div>
+                        <div class="testimonial-item text-center">
+                            <img class="border rounded-circle p-2 mx-auto mb-3" src="{% static 'img\student4.svg' %}"
+                                style="width: 80px; height: 80px;">
+                            <h5 class="mb-0">Merittah Hannah</h5>
+                            <p>Web Development Student</p>
+                            <div class="testimonial-text bg-light text-center p-4">
+                                <p class="mb-0">Learning here wasn’t just about skills—it was about belonging. The peer
+                                    discussions and group projects taught me teamwork and leadership.”</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Testimonial End -->
+
+
+        <!-- Footer Start -->
+
+        {% include 'footer.html' %}
+
+        <!-- Footer End -->
+
+        <!-- Back to Top -->
+        <a href="#index.html" class="btn btn-lg btn-info btn-lg-rounded back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="{% static 'lib/wow/wow.min.js' %}"></script>
+        <script src="{% static 'lib/easing/easing.min.js' %}"></script>
+        <script src="{% static 'lib/waypoints/waypoints.min.js' %}"></script>
+        <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+
+        <!-- Template Javascript -->
+        <script src="{% static 'js/main.js' %}"></script>
+</body>
+
+</html>

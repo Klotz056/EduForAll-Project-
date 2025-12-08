@@ -1,0 +1,49 @@
+<nav class="navbar navbar-expand-lg bg-dark navbar-light shadow sticky-top p-0">
+    <a href="/" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+        <!-- <img src="assets/svg/logo.svg" alt="logo" class="img-fluid me-4" width="40" rcset=""> -->
+
+        <h2 class="m-0 text-info"><i class="fa fa-book me-3"></i>
+                </i>EduForAll</h2>
+
+        <!-- <i class="fa fa-book me-3"></i> -->
+    </a>
+    <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="navbar-nav ms-auto p-4 p-lg-0">
+            <a href="#index.html" class="nav-item nav-link active text-info">Home</a>
+            <a href="#about.html" class="nav-item nav-link text-info">About</a>
+            <a href="#courses.html" class="nav-item nav-link text-info">Courses</a>
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle text-info" data-bs-toggle="dropdown">Pages</a>
+                <div class="dropdown-menu fade-down m-0 bg-secondary">
+                    <a href="#service.html" class="dropdown-item text-info">Explore</a>
+                    <a href="#testimonial.html" class="dropdown-item text-info">Testimonial</a>
+                    <a href="#team.html" class="dropdown-item text-info">Our Team</a>
+                </div>
+            </div>
+            <a href="#contact.html" class="nav-item nav-link text-info">Contact</a>
+        </div>
+
+        <!-- Show different buttons based on login status -->
+        {% if request.session.logged_in %}
+        <div class="nav-item dropdown d-none d-lg-block">
+            <a href="#" class="nav-link dropdown-toggle bg-secondary text-white px-lg-4 py-4" data-bs-toggle="dropdown">
+                <i class="fa fa-user me-2"></i>{{ request.session.user_name }}
+            </a>
+            <div class="dropdown-menu fade-down m-0 bg-secondary">
+                <a href="{% url 'learning_center' %}" class="dropdown-item text-info"><i
+                        class="fa fa-graduation-cap me-2"></i>Learning Center</a>
+                <a href="{% url 'dashboard' %}" class="dropdown-item text-info"><i
+                        class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                <a href="{% url 'logout' %}" class="dropdown-item text-info"><i
+                        class="fa fa-sign-out-alt me-2"></i>Logout</a>
+            </div>
+        </div>
+        {% else %}
+        <a href="{% url 'login' %}" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block bg-secondary">Join Now<i
+                class="fa fa-arrow-right ms-3"></i></a>
+        {% endif %}
+    </div>
+</nav>

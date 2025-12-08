@@ -1,0 +1,491 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Learning Center - EduForAll</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="{% static 'img/favicon.ico' %}" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="{% static 'lib/animate/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+    <style>
+        .learning-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 0;
+            margin-bottom: 40px;
+        }
+
+        .learning-header h1 {
+            margin: 0;
+            font-weight: 700;
+            font-size: 2.5rem;
+        }
+
+        .learning-header p {
+            margin: 10px 0 0 0;
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        .user-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-top: 15px;
+        }
+
+        .learning-container {
+            padding: 40px 0;
+            background: #f8f9fa;
+            min-height: 100vh;
+        }
+
+        .section-title {
+            color: #667eea;
+            font-weight: 700;
+            margin-bottom: 30px;
+            font-size: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .feature-card h4 {
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            color: #666;
+            margin: 0;
+        }
+
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .course-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .course-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+
+        .course-body {
+            padding: 20px;
+        }
+
+        .course-body h5 {
+            margin: 0 0 10px 0;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .course-body p {
+            color: #666;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .course-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+            margin-top: 15px;
+        }
+
+        .course-footer small {
+            color: #999;
+        }
+
+        .btn-enroll {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+
+        .btn-enroll:hover {
+            background: #031b3c;
+            text-decoration: none;
+            color: white;
+        }
+
+        .stat-box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            color: #667eea;
+            font-weight: 700;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        .welcome-section {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .welcome-section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .btn-action {
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .btn-primary-action {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary-action:hover {
+            background: rgb(60, 60, 114);
+            color: white;
+            text-decoration: none;
+        }
+
+        .btn-secondary-action {
+            background: #f0f0f0;
+            color: #333;
+        }
+
+        .btn-secondary-action:hover {
+            background: #e0e0e0;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .empty-courses {
+            text-align: center;
+            padding: 40px;
+            background: white;
+            border-radius: 10px;
+            color: #666;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar Start -->
+    {% include 'navbar.html' %}
+    <!-- Navbar End -->
+
+    <!-- Learning Header -->
+    <div class="learning-header bg-info">
+        <div class="container">
+            {% if user_role == 'student' %}
+            <h1><i class="fas fa-graduation-cap me-3"></i>Learning Center</h1>
+            <p>Welcome, {{ user_name }}. Continue your learning journey.</p>
+            <div class="user-badge">
+                <i class="fas fa-user-circle me-2"></i>
+                {{ user_role|capfirst }} Account
+            </div>
+            {% else %}
+            <h1><i class="fas fa-chalkboard-user me-3"></i>Mentor Center</h1>
+            <p>Welcome, {{ user_name }}. Manage your courses and mentor students.</p>
+            <div class="user-badge">
+                <i class="fas fa-user-circle me-2"></i>
+                {{ user_role|capfirst }} Account
+                {% endif %}
+        </div>
+    </div>
+
+    <!-- Learning Content -->
+    <div class="learning-container">
+        <div class="container">
+            <!-- Welcome Section -->
+            <div class="welcome-section">
+                {% if user_role == 'student' %}
+                <h2 class=""><i class="fas fa-book me-2 text-dark"></i>Your Learning Dashboard</h2>
+                <p>Explore our extensive collection of courses, connect with mentors, and enhance your skills. You're
+                    all set to begin your learning adventure!</p>
+                {% else %}
+                <h2 class=""><i class="fas fa-chalkboard-user me-2 text-dark"></i>Your Mentor Dashboard</h2>
+                <p>As a mentor, you have the power to shape the future of learners. Create impactful courses, share your
+                    expertise, and inspire the next generation of professionals.</p>
+                {% endif %}
+
+
+                <div class="action-buttons">
+                    {% if user_role == 'student' %}
+                    <a href="#courses" class="btn-action btn-primary-action">
+                        <i class="fas fa-book-open me-2"></i>Browse Courses
+                    </a>
+                    {% else %}
+                    <a href="#" class="btn-action btn-primary-action">
+                        <i class="fas fa-plus me-2"></i>Create Course
+                    </a>
+                    {% endif %}
+                    <a href="{% url 'dashboard' %}" class="btn-action btn-primary-action">
+                        <i class="fas fa-user me-2"></i>View Profile
+                    </a>
+                    <a href="{% url 'school' %}" class="btn-action btn-primary-action">
+                        <i class="fas fa-home me-2"></i>Back to Home
+                    </a>
+                </div>
+            </div>
+
+            <!-- Statistics -->
+            <div class="row mb-5">
+                <div class="col-md-4">
+                    <div class="stat-box">
+                        <div class="stat-number">{{ courses|length }}</div>
+                        <div class="stat-label">Available Courses</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stat-box">
+                        <div class="stat-number">1</div>
+                        <div class="stat-label">Your Account</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stat-box">
+                        <div class="stat-number">∞</div>
+                        <div class="stat-label">Learning Potential</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Courses Section -->
+            {% if user_role == 'student' %}
+            <div id="courses">
+                <h3 class="section text-center text-dark"><i class="fas"></i>Available Courses</h3>
+
+                {% if courses %}
+                <div class="course-grid">
+                    {% for course in courses %}
+                    <div class="course-card">
+                        <div class="course-image ">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <div class="course-body">
+                            <h5>{{ course.title }}</h5>
+                            <p>{{ course.description|truncatewords:10 }}</p>
+                            <div class="course-footer">
+                                <small><i class="fas fa-user me-1"></i>{{ course.instructor.first_name }}</small>
+                                <a href="#" class="btn-enroll"><i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <div class="empty-courses">
+                    <i class="fas fa-inbox" style="font-size: 3rem; margin-bottom: 20px; display: block;"></i>
+                    <p>No courses available yet. Check back soon!</p>
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Features Section -->
+            <div class="mt-5">
+                <h3 class="section text-center text-da"><i class="fas"></i>Why Choose EduForAll?</h3>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-video"></i>
+                            </div>
+                            <h4>Interactive Learning</h4>
+                            <p>Engage with high-quality course content, videos, and interactive exercises designed to
+                                enhance your learning experience.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h4>Expert Mentors</h4>
+                            <p>Learn from experienced mentors in your field. Get guidance, feedback, and personalized
+                                support throughout your journey.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-certificate"></i>
+                            </div>
+                            <h4>Certification</h4>
+                            <p>Earn recognized certificates upon course completion. Showcase your achievements and
+                                skills to potential employers.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% else %}
+            <!-- Mentor Features -->
+            <div>
+                <h2 class="section-title"><i class="fas fa-chalkboard-user me-2"></i>Mentor Dashboard</h2>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-plus-circle"></i>
+                            </div>
+                            <h4>Create Courses</h4>
+                            <p>Share your expertise by creating and publishing courses. Reach thousands of learners
+                                around the world.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h4>Track Progress</h4>
+                            <p>Monitor student progress and engagement. Get detailed analytics on course performance and
+                                student achievements.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-comments"></i>
+                            </div>
+                            <h4>Student Interactions</h4>
+                            <p>Engage directly with your students through messages, forums, and Q&A sessions to support
+                                their learning.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <h4>Build Your Brand</h4>
+                            <p>Establish yourself as an authority in your field and build a community of engaged
+                                learners.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Footer Start -->
+    {% include 'footer.html' %}
+    <!-- Footer End -->
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-info btn-lg-rounded back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'lib/wow/wow.min.js' %}"></script>
+    <script src="{% static 'lib/easing/easing.min.js' %}"></script>
+    <script src="{% static 'lib/waypoints/waypoints.min.js' %}"></script>
+    <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+
+    <!-- Template Javascript -->
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+
+</html>
