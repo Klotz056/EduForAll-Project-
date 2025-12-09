@@ -329,7 +329,7 @@
             <div class="row mb-5">
                 <div class="col-md-4">
                     <div class="stat-box">
-                        <div class="stat-number">{{ courses|length }}</div>
+                        <div class="stat-number">{{ course|length }}</div>
                         <div class="stat-label">Available Courses</div>
                     </div>
                 </div>
@@ -352,7 +352,7 @@
             <div id="courses">
                 <h3 class="section text-center text-dark"><i class="fas"></i>Available Courses</h3>
 
-                {% if courses %}
+                {% if course %}
                 <div class="course-grid">
                     {% for course in courses %}
                     <div class="course-card">

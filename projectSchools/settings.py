@@ -122,6 +122,10 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static'
     ]
 
+# Media files (User uploads)
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
 
 # Session Configuration
 # Sessions are saved to database by default (django.contrib.sessions.backends.db)
@@ -136,3 +140,16 @@ SESSION_SAVE_EVERY_REQUEST = True  # Save session on every request
 
 # Allow user to stay logged in
 SESSION_COOKIE_PERSISTENCE = True
+
+
+# Email Configuration
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # For development
+# For production, use:
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = 'your-email@gmail.com'
+# EMAIL_HOST_PASSWORD = 'your-app-password'
+
+DEFAULT_FROM_EMAIL = 'noreply@eduforall.com'

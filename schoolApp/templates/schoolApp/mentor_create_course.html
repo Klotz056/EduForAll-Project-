@@ -1,0 +1,265 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Create Course - EduForAll</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <!-- Favicon -->
+    <link href="{% static 'img/favicon.ico' %}" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+    <style>
+        .form-container {
+            max-width: 700px;
+            margin: 50px auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 2px solid #4a28a7;
+            padding-bottom: 20px;
+        }
+
+        .form-header h2 {
+            color: #2857a7;
+            margin-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .form-control,
+        .form-select {
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            padding: 10px 15px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: #3128a7;
+            box-shadow: 0 0 0 0.2rem rgba(40, 53, 167, 0.25);
+        }
+
+        .form-text {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, #4247d7 0%, #2096c9 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-weight: 600;
+            border-radius: 5px;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(44, 40, 167, 0.3);
+        }
+
+        .btn-cancel {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-weight: 600;
+            border-radius: 5px;
+            width: 100%;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-cancel:hover {
+            background: #5a6268;
+            color: white;
+        }
+
+        .alert {
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .form-container {
+                margin: 20px;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    {% include 'navbar.html' %}
+
+    <div class="container">
+        <div class="form-container">
+            <div class="form-header">
+                <h2><i class="fa fa-plus-circle me-2"></i>Create a New Course</h2>
+                <p class="text-muted mb-0">Share your expertise and create an engaging course for learners</p>
+            </div>
+
+            {% if messages %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {% for message in messages %}
+                {{ message }}
+                {% endfor %}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+            {% endif %}
+
+            <form method="POST">
+                {% csrf_token %}
+
+                <!-- Course Title -->
+                <div class="form-group">
+                    <label class="form-label" for="title">Course Title *</label>
+                    <input type="text" class="form-control" id="title" name="title" required
+                        placeholder="e.g., Advanced Web Development">
+                    <small class="form-text">Give your course a clear, engaging title</small>
+                </div>
+
+                <!-- Course Description -->
+                <div class="form-group">
+                    <label class="form-label" for="description">Course Description *</label>
+                    <textarea class="form-control" id="description" name="description" rows="4" required
+                        placeholder="Describe what students will learn..."></textarea>
+                    <small class="form-text">Be descriptive about course content and outcomes</small>
+                </div>
+
+                <!-- Course Type -->
+                <div class="form-group">
+                    <label class="form-label" for="course_type">Course Type *</label>
+                    <select class="form-select" id="course_type" name="course_type" required
+                        onchange="updatePriceVisibility()">
+                        <option value="both">Both Free and Paid Options</option>
+                        <option value="free">Free Tutorial Only</option>
+                        <option value="paid">Paid Course Only</option>
+                    </select>
+                    <small class="form-text">Choose whether to offer free tutorials, paid courses, or both</small>
+                </div>
+
+                <!-- Price (shown only for paid courses) -->
+                <div class="form-group" id="price-group" style="display: none;">
+                    <label class="form-label" for="price">Course Price ($) *</label>
+                    <input type="number" class="form-control" id="price" name="price" min="0" step="0.01"
+                        placeholder="99.99">
+                    <small class="form-text">Set the price for paid enrollment option</small>
+                </div>
+
+                <!-- Duration -->
+                <div class="form-group">
+                    <label class="form-label" for="duration_weeks">Duration (weeks) *</label>
+                    <input type="number" class="form-control" id="duration_weeks" name="duration_weeks" required min="1"
+                        value="4" placeholder="4">
+                    <small class="form-text">How many weeks will this course run?</small>
+                </div>
+
+                <!-- Start Date -->
+                <div class="form-group">
+                    <label class="form-label" for="start_date">Start Date *</label>
+                    <input type="date" class="form-control" id="start_date" name="start_date" required>
+                    <small class="form-text">When should the course start?</small>
+                </div>
+
+                <!-- End Date -->
+                <div class="form-group">
+                    <label class="form-label" for="end_date">End Date *</label>
+                    <input type="date" class="form-control" id="end_date" name="end_date" required>
+                    <small class="form-text">When should the course end?</small>
+                </div>
+
+                <!-- Course Content -->
+                <div class="form-group">
+                    <label class="form-label" for="content">Course Content/Syllabus</label>
+                    <textarea class="form-control" id="content" name="content" rows="5"
+                        placeholder="Outline the topics and lessons..."></textarea>
+                    <small class="form-text">Describe the course structure and content topics</small>
+                </div>
+
+                <!-- Buttons -->
+                <button type="submit" class="btn-submit">
+                    <i class="fa fa-save me-2"></i>Create Course
+                </button>
+                <a href="{% url 'mentor_dashboard' %}" class="btn-cancel">
+                    <i class="fa fa-times me-2"></i>Cancel
+                </a>
+            </form>
+        </div>
+    </div>
+
+    {% include 'footer.html' %}
+
+    <!-- JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script>
+        function updatePriceVisibility() {
+            const courseType = document.getElementById('course_type').value;
+            const priceGroup = document.getElementById('price-group');
+            const priceInput = document.getElementById('price');
+
+            if (courseType === 'paid' || courseType === 'both') {
+                priceGroup.style.display = 'block';
+                priceInput.required = (courseType === 'paid');
+            } else {
+                priceGroup.style.display = 'none';
+                priceInput.required = false;
+            }
+        }
+
+        // Validate end date is after start date
+        document.querySelector('form').addEventListener('submit', function (e) {
+            const startDate = new Date(document.getElementById('start_date').value);
+            const endDate = new Date(document.getElementById('end_date').value);
+
+            if (endDate <= startDate) {
+                e.preventDefault();
+                alert('End date must be after start date');
+            }
+        });
+
+        // Initialize price visibility
+        updatePriceVisibility();
+    </script>
+</body>
+
+</html>

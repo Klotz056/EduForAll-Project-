@@ -1,0 +1,287 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Enroll in {{ course.title }} - EduForAll</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <!-- Favicon -->
+    <link href="{% static 'img/favicon.ico' %}" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+    <style>
+        .enroll-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .enroll-header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 20px;
+        }
+
+        .enroll-header h2 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+        }
+
+        .form-section h4 {
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .option-card {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .option-card:hover {
+            border-color: #667eea;
+            background: #f8f9fa;
+        }
+
+        .option-card input[type="radio"]:checked+.option-content {
+            color: #667eea;
+        }
+
+        .option-content {
+            padding-left: 30px;
+        }
+
+        .option-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .option-description {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .price-badge {
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-top: 5px;
+        }
+
+        .btn-enroll {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            color: white;
+            padding: 12px 30px;
+            font-weight: 600;
+            border-radius: 5px;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .btn-enroll:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
+            color: white;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    {% include 'navbar.html' %}
+
+    <div class="container my-5">
+        <div class="enroll-container">
+            <a href="{% url 'course_detail' course.id %}" class="back-link">
+                <i class="fa fa-arrow-left me-2"></i>Back to Course
+            </a>
+
+            <div class="enroll-header">
+                <h2>Enroll in Course</h2>
+                <p class="text-muted mb-0">{{ course.title }}</p>
+            </div>
+
+            {% if messages %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                {% for message in messages %}
+                {{ message }}
+                {% endfor %}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+            {% endif %}
+
+            <form method="POST">
+                {% csrf_token %}
+
+                <!-- Enrollment Type Selection -->
+                <div class="form-section">
+                    <h4><i class="fa fa-graduation-cap me-2"></i>Select Your Learning Path</h4>
+
+                    {% if course.course_type != 'paid' %}
+                    <label class="option-card">
+                        <input type="radio" name="enrollment_type" value="free" required
+                            onchange="updateMentorVisibility()">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <i class="fa fa-book me-2"></i>Free Tutorial
+                            </div>
+                            <div class="option-description">
+                                Learn at your own pace with recorded videos and materials. No instructor feedback.
+                            </div>
+                            <div class="price-badge">FREE</div>
+                        </div>
+                    </label>
+                    {% endif %}
+
+                    {% if course.course_type != 'free' %}
+                    <label class="option-card">
+                        <input type="radio" name="enrollment_type" value="mentored" required
+                            onchange="updateMentorVisibility()">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <i class="fa fa-users me-2"></i>With Mentoring
+                            </div>
+                            <div class="option-description">
+                                Get personalized guidance from an expert mentor. Includes feedback and support.
+                            </div>
+                            <div class="price-badge">${{ course.price }}</div>
+                        </div>
+                    </label>
+                    {% endif %}
+                </div>
+
+                <!-- Mentor Selection (shown only for mentored option) -->
+                <div id="mentor-section" class="form-section" style="display: none;">
+                    <h4><i class="fa fa-chalkboard-user me-2"></i>Select Your Mentor</h4>
+
+                    {% if mentors %}
+                    <select name="mentor_id" class="form-select" id="mentor-select">
+                        <option value="">-- Choose a mentor --</option>
+                        {% for mentor in mentors %}
+                        <option value="{{ mentor.id }}">
+                            {{ mentor.first_name }} {{ mentor.last_name }}
+                            {% if mentor.expertise %} - {{ mentor.expertise }}{% endif %}
+                        </option>
+                        {% endfor %}
+                    </select>
+                    <small class="form-text text-muted d-block mt-2">
+                        <i class="fa fa-info-circle me-1"></i>
+                        Choose a mentor who matches your learning goals
+                    </small>
+                    {% else %}
+                    <div class="alert alert-info">
+                        <i class="fa fa-info-circle me-2"></i>
+                        No mentors are currently available. You can still enroll in the free tutorial.
+                    </div>
+                    {% endif %}
+                </div>
+
+                <!-- Course Summary -->
+                <div class="form-section bg-light p-3 rounded">
+                    <h5 class="mb-3">Course Summary</h5>
+                    <div class="row">
+                        <div class="col-6">
+                            <p><strong>Duration:</strong> {{ course.duration_weeks }} weeks</p>
+                            <p><strong>Instructor:</strong> {{ course.instructor.first_name }} {{
+                                course.instructor.last_name }}</p>
+                        </div>
+                        <div class="col-6">
+                            <p><strong>Start Date:</strong> {{ course.start_date|date:"M d, Y" }}</p>
+                            <p><strong>End Date:</strong> {{ course.end_date|date:"M d, Y" }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Terms and Conditions -->
+                <div class="form-check mb-3">
+                    <input class="form-check-input" type="checkbox" id="terms" required>
+                    <label class="form-check-label" for="terms">
+                        I agree to the <a href="#" target="_blank">terms and conditions</a>
+                    </label>
+                </div>
+
+                <!-- Buttons -->
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-enroll">
+                        <i class="fa fa-check me-2"></i>Confirm Enrollment
+                    </button>
+                    <a href="{% url 'course_detail' course.id %}" class="btn btn-outline-secondary">
+                        <i class="fa fa-times me-2"></i>Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    {% include 'footer.html' %}
+
+    <!-- JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script>
+        function updateMentorVisibility() {
+            const enrollmentType = document.querySelector('input[name="enrollment_type"]:checked');
+            const mentorSection = document.getElementById('mentor-section');
+            const mentorSelect = document.getElementById('mentor-select');
+
+            if (enrollmentType && enrollmentType.value === 'mentored') {
+                mentorSection.style.display = 'block';
+                mentorSelect.required = true;
+            } else {
+                mentorSection.style.display = 'none';
+                mentorSelect.required = false;
+                mentorSelect.value = '';
+            }
+        }
+
+        // Initialize visibility on page load
+        document.addEventListener('DOMContentLoaded', function () {
+            updateMentorVisibility();
+        });
+    </script>
+</body>
+
+</html>
