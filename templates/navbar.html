@@ -11,18 +11,18 @@
             {% if request.session.logged_in %}
             <a href="{% url 'school' %}" class="nav-item nav-link text-info">Courses</a>
             {% else %}
-            <a href="{% url 'school' %}" class="nav-item nav-link text-info">Courses</a>
+            <a href="#courses.html" class="nav-item nav-link text-info">Courses</a>
             {% endif %}
-            <a href="#about" class="nav-item nav-link text-info">About</a>
+            <a href="{% url 'school' %}" class="nav-item nav-link text-info">About</a>
             <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle text-info" data-bs-toggle="dropdown">Resources</a>
+                <a href="#" class="nav-link dropdown-toggle text-info" data-bs-toggle="dropdown">Pages</a>
                 <div class="dropdown-menu fade-down m-0 bg-secondary">
                     <a href="{% url 'instructor' %}" class="dropdown-item text-info">Instructors</a>
                     <a href="{% url 'certificate' %}" class="dropdown-item text-info">Certifications</a>
                     <a href="{% url 'books' %}" class="dropdown-item text-info">Learning Materials</a>
                 </div>
             </div>
-            <a href="#contact" class="nav-item nav-link text-info">Contact</a>
+            <a href="{% url 'school' %}" class="nav-item nav-link text-info">Contact</a>
         </div>
 
         <!-- Show different buttons based on login status -->

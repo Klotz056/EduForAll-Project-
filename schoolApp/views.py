@@ -13,6 +13,9 @@ from . import models
 def school(request):
     return render(request, 'schoolApp/home.html')
 
+def about_view(request):
+     return render(request, 'schoolApp/about.html')
+
 def readmore(request):
     return render(request, 'schoolApp/readmore.html')
 
