@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-wk(jx8y6_2c63sd2w4pne_hwsko8d#evwk_!6=jo1996j(4dv^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.onrender.com', 'localhost']
 
 
 # Application definition
@@ -50,7 +50,11 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'schoolApp.middleware.SessionMiddleware',
     'schoolApp.middleware.AutoLogoutMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+
 ]
+STATIC_URL = '/static/' 
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 ROOT_URLCONF = 'projectSchools.urls'
 
