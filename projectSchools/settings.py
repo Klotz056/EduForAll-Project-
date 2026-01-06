@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
+import os
+import dj_database_url
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,12 +23,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-wk(jx8y6_2c63sd2w4pne_hwsko8d#evwk_!6=jo1996j(4dv^'
+SECRET_KEY = config('SECRET_KEY', default='django-insecure-wk(jx8y6_2c63sd2w4pne_hwsko8d#evwk_!6=jo1996j(4dv^')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', default=True, cast=bool)
 
-ALLOWED_HOSTS = ['.onrender.com', 'localhost']
+# ALLOWED_HOSTS configuration
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1').split(',')
+if not DEBUG:
+    ALLOWED_HOSTS.extend(['.vercel.app', '.onrender.com'])
 
 
 # Application definition
@@ -42,6 +48,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -50,11 +57,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'schoolApp.middleware.SessionMiddleware',
     'schoolApp.middleware.AutoLogoutMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
-
 ]
-STATIC_URL = '/static/' 
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+# STATIC_URL = '/static/' 
+# STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 ROOT_URLCONF = 'projectSchools.urls'
 
@@ -76,15 +81,26 @@ TEMPLATES = [
 WSGI_APPLICATION = 'projectSchools.wsgi.application'
 
 
-# Database
+# Database Configuration
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
+# Use environment variable DATABASE_URL for Postgres or SQLite for development
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if config('DATABASE_URL', default=None):
+    # Production: Use managed Postgres (Neon, ElephantSQL, Render DB, etc.)
+    DATABASES = {
+        'default': dj_database_url.config(
+            default=config('DATABASE_URL'),
+            conn_max_age=600
+        )
     }
-}
+else:
+    # Development: Use SQLite
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 
 # Password validation
@@ -121,10 +137,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [
     BASE_DIR / 'static'
-    ]
+]
+
+# WhiteNoise Configuration for serving static files in production
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Media files (User uploads)
 MEDIA_URL = 'media/'
@@ -142,11 +162,30 @@ SESSION_COOKIE_SECURE = False  # Set to True in production with HTTPS
 SESSION_COOKIE_HTTPONLY = True  # Prevent JavaScript from accessing session cookie
 SESSION_SAVE_EVERY_REQUEST = True  # Save session on every request
 
-# Allow user to stay logged in
-SESSION_COOKIE_PERSISTENCE = True
+# CSRF & Security Configuration
+CSRF_TRUSTED_ORIGINS = config(
+    'CSRF_TRUSTED_ORIGINS',
+    default='http://localhost:8000,http://127.0.0.1:8000'
+).split(',')
 
+# Add your Vercel domain here once deployed
+# CSRF_TRUSTED_ORIGINS = [
+#     'http://localhost:8000',
+#     'https://your-domain.vercel.app',
+# ]
 
-# Email Configuration
+# Security settings for production
+if not DEBUG:
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_BROWSER_XSS_FILTER = True
+    SECURE_CONTENT_SECURITY_POLICY = {
+        'default-src': ("'self'",),
+    }
+else:
+    SESSION_COOKIE_SECURE = False
+    CSRF_COOKIE_SECURE = False
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # For development
 # For production, use:
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
