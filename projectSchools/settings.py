@@ -29,11 +29,15 @@ SECRET_KEY = config('SECRET_KEY', default='django-insecure-wk(jx8y6_2c63sd2w4pne
 DEBUG = config('DEBUG', default=True, cast=bool)
 
 # ALLOWED_HOSTS configuration
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1').split(',')
-if not DEBUG:
-    ALLOWED_HOSTS.extend(['.vercel.app', '.onrender.com'])
-    ALLOWED_HOSTS = ["eduforall-project.onrender.com", "localhost"]
+# ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1').split(',')
+#if not DEBUG:
+#ALLOWED_HOSTS.extend(['.vercel.app', '.onrender.com'])
+#ALLOWED_HOSTS = ["eduforall-project.onrender.com", "localhost"]
 
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1').split(',')
+
+if not DEBUG:
+    ALLOWED_HOSTS += ['.vercel.app', '.onrender.com', 'eduforall-project.onrender.com']
 
 
 # Application definition
