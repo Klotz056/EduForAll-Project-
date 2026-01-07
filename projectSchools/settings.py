@@ -32,6 +32,8 @@ DEBUG = config('DEBUG', default=True, cast=bool)
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1').split(',')
 if not DEBUG:
     ALLOWED_HOSTS.extend(['.vercel.app', '.onrender.com'])
+    ALLOWED_HOSTS = ["eduforall-project.onrender.com", "localhost"]
+
 
 
 # Application definition
