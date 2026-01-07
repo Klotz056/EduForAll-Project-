@@ -26,7 +26,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY', default='django-insecure-wk(jx8y6_2c63sd2w4pne_hwsko8d#evwk_!6=jo1996j(4dv^')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=True, cast=bool)
+DEBUG = config('DEBUG', default=False, cast=bool) 
+# DEBUG = config('DEBUG', default=True, cast=bool)
 
 # ALLOWED_HOSTS configuration
 # ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1').split(',')
@@ -34,10 +35,15 @@ DEBUG = config('DEBUG', default=True, cast=bool)
 #ALLOWED_HOSTS.extend(['.vercel.app', '.onrender.com'])
 #ALLOWED_HOSTS = ["eduforall-project.onrender.com", "localhost"]
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1').split(',')
+# ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1').split(',')
 
-if not DEBUG:
-    ALLOWED_HOSTS += ['.vercel.app', '.onrender.com', 'eduforall-project.onrender.com']
+# if not DEBUG:
+#     ALLOWED_HOSTS += ['.vercel.app', '.onrender.com', 'eduforall-project.onrender.com']
+ALLOWED_HOSTS = config(
+    'ALLOWED_HOSTS',
+    default='localhost,127.0.0.1,eduforall-project.onrender.com,.onrender.com'
+).split(',')
+
 
 
 # Application definition
@@ -153,7 +159,7 @@ STATICFILES_DIRS = [
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Media files (User uploads)
-MEDIA_URL = 'media/'
+MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 
@@ -171,7 +177,7 @@ SESSION_SAVE_EVERY_REQUEST = True  # Save session on every request
 # CSRF & Security Configuration
 CSRF_TRUSTED_ORIGINS = config(
     'CSRF_TRUSTED_ORIGINS',
-    default='http://localhost:8000,http://127.0.0.1:8000'
+    default='http://localhost:8000,http://127.0.0.1:8000, https://eduforall-project.onrender.com'
 ).split(',')
 
 # Add your Vercel domain here once deployed
@@ -186,9 +192,9 @@ if not DEBUG:
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
     SECURE_BROWSER_XSS_FILTER = True
-    SECURE_CONTENT_SECURITY_POLICY = {
-        'default-src': ("'self'",),
-    }
+    # SECURE_CONTENT_SECURITY_POLICY = {
+    #     'default-src': ("'self'",),
+    # }
 else:
     SESSION_COOKIE_SECURE = False
     CSRF_COOKIE_SECURE = False
