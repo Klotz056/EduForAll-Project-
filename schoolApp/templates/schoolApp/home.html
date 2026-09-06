@@ -1,8 +1,1246 @@
-{% extends 'index.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block content %}
-    <div class="container my-5">
-        <div class="display-6"> Welcome to School App Home Page </div>
-    </div>
-{% endblock %}
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EduForAll — Unlocking Tech Education for Everyone</title>
+    <link href="{% static 'img/favicon.svg' %}" rel="icon" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <style>
+        :root {
+            --white: #ffffff;
+            --paper: #f7f6f2;
+            --ink: #14171f;
+            --ink-soft: #4b4f5b;
+            --line: #e6e2d8;
+            --gold: #e2a63b;
+            --gold-deep: #c8871f;
+            --teal: #0f5c46;
+            --teal-deep: #0a4735;
+            --radius-sm: 10px;
+            --radius-md: 16px;
+            --maxw: 1180px;
+        }
 
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            color: var(--ink);
+            background: var(--white);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Sora', sans-serif;
+            margin: 0;
+            line-height: 1.15;
+            letter-spacing: -0.01em;
+        }
+
+        p {
+            margin: 0;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .wrap {
+            max-width: var(--maxw);
+            margin: 0 auto;
+            padding: 0 28px;
+        }
+
+        section {
+            padding: 96px 0;
+        }
+
+        .eyebrow {
+            color: var(--teal);
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        .section-head {
+            max-width: 620px;
+            margin-bottom: 52px;
+        }
+
+        .section-head h2 {
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            font-weight: 700;
+        }
+
+        .section-head p {
+            margin-top: 14px;
+            color: var(--ink-soft);
+            font-size: 1.05rem;
+        }
+
+        :focus-visible {
+            outline: 3px solid var(--gold);
+            outline-offset: 2px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 26px;
+            border-radius: 999px;
+            font-weight: 600;
+            font-size: 0.98rem;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+        }
+
+        .btn-primary {
+            background: var(--teal);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: var(--teal-deep);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 24px rgba(15, 92, 70, 0.25);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            border-color: var(--line);
+            color: var(--ink);
+        }
+
+        .btn-ghost:hover {
+            border-color: var(--ink);
+            transform: translateY(-2px);
+        }
+
+        .btn-gold {
+            background: var(--gold);
+            color: #211505;
+        }
+
+        .btn-gold:hover {
+            background: var(--gold-deep);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 24px rgba(226, 166, 59, 0.3);
+        }
+
+        .hero {
+            padding: 72px 0 0;
+            overflow: visible;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.05fr 1fr;
+            gap: 56px;
+            align-items: center;
+        }
+
+        .hero-copy .eyebrow {
+            color: var(--gold-deep);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.4rem, 4.4vw, 3.6rem);
+            font-weight: 800;
+            margin-top: 10px;
+        }
+
+        .hero h1 span {
+            color: var(--teal);
+        }
+
+        .hero p.lead {
+            margin-top: 20px;
+            font-size: 1.12rem;
+            color: var(--ink-soft);
+            max-width: 520px;
+        }
+
+        .hero-ctas {
+            display: flex;
+            gap: 14px;
+            margin-top: 34px;
+            flex-wrap: wrap;
+        }
+
+        .hero-media {
+            position: relative;
+        }
+
+        .hero-media .frame {
+            border-radius: 24px;
+            overflow: hidden;
+            aspect-ratio: 4/4.3;
+            background: var(--paper);
+            border: 1px solid var(--line);
+        }
+
+        .hero-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .float-card {
+            position: absolute;
+            left: -38px;
+            bottom: -34px;
+            background: var(--white);
+            border: 1px solid var(--line);
+            border-radius: var(--radius-md);
+            padding: 18px 22px;
+            box-shadow: 0 20px 45px rgba(20, 23, 31, 0.12);
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            max-width: 270px;
+        }
+
+        .float-card .num {
+            font-family: 'Sora', sans-serif;
+            font-weight: 800;
+            font-size: 1.6rem;
+            color: var(--teal);
+        }
+
+        .float-card .lbl {
+            font-size: 0.85rem;
+            color: var(--ink-soft);
+        }
+
+        .stat-strip {
+            margin-top: 110px;
+            background: var(--ink);
+            color: var(--white);
+        }
+
+        .stat-strip .wrap {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            padding: 40px 28px;
+        }
+
+        .stat-item {
+            text-align: center;
+            border-left: 1px solid rgba(255, 255, 255, 0.14);
+            padding: 0 12px;
+        }
+
+        .stat-item:first-child {
+            border-left: none;
+        }
+
+        .stat-item .num {
+            font-family: 'Sora', sans-serif;
+            font-size: 1.9rem;
+            font-weight: 800;
+            color: var(--gold);
+        }
+
+        .stat-item .lbl {
+            font-size: 0.88rem;
+            color: rgba(255, 255, 255, 0.72);
+            margin-top: 4px;
+        }
+
+        .features {
+            background: var(--white);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+            border: 1px solid var(--line);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+        }
+
+        .feature {
+            padding: 34px 28px;
+            border-left: 1px solid var(--line);
+        }
+
+        .feature:first-child {
+            border-left: none;
+        }
+
+        .feature h3 {
+            font-size: 1.08rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .feature p {
+            color: var(--ink-soft);
+            font-size: 0.95rem;
+        }
+
+        .feature .go {
+            display: inline-block;
+            margin-top: 16px;
+            font-weight: 600;
+            color: var(--teal);
+            font-size: 0.92rem;
+        }
+
+        .categories {
+            background: var(--paper);
+        }
+
+        .category-marquee {
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .cat-grid {
+            display: flex;
+            gap: 20px;
+            width: max-content;
+            animation: categories-left 24s linear infinite;
+        }
+
+        .category-marquee:hover .cat-grid {
+            animation-play-state: paused;
+        }
+
+        .cat-card {
+            flex: 0 0 240px;
+        }
+
+        @keyframes categories-left {
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(-50%);
+            }
+        }
+
+        .cat-card {
+            background: var(--white);
+            border-radius: var(--radius-md);
+            padding: 28px 24px;
+            border-left: 4px solid var(--gold);
+            box-shadow: 0 8px 20px rgba(20, 23, 31, 0.04);
+        }
+
+        .cat-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .cat-card .count {
+            margin-top: 8px;
+            color: var(--ink-soft);
+            font-size: 0.92rem;
+        }
+
+        .cat-card:nth-child(2) {
+            border-left-color: var(--teal);
+        }
+
+        .cat-card:nth-child(3) {
+            border-left-color: #8a6fd6;
+        }
+
+        .cat-card:nth-child(4) {
+            border-left-color: #d16b56;
+        }
+
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 26px;
+        }
+
+        .course-card {
+            border: 1px solid var(--line);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            background: var(--white);
+            transition: box-shadow .2s ease, transform .2s ease;
+        }
+
+        .course-card:hover {
+            box-shadow: 0 18px 40px rgba(20, 23, 31, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .course-thumb {
+            aspect-ratio: 16/10;
+            overflow: hidden;
+            background: var(--paper);
+        }
+
+        .course-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .course-body {
+            padding: 22px;
+        }
+
+        .course-price {
+            color: var(--teal);
+            font-weight: 800;
+            font-size: 1.15rem;
+            font-family: 'Sora', sans-serif;
+        }
+
+        .course-reviews {
+            color: var(--ink-soft);
+            font-size: 0.85rem;
+            margin-left: 8px;
+        }
+
+        .course-title {
+            margin-top: 8px;
+            font-weight: 700;
+            font-size: 1.02rem;
+        }
+
+        .course-meta {
+            margin-top: 14px;
+            display: flex;
+            justify-content: space-between;
+            color: var(--ink-soft);
+            font-size: 0.86rem;
+            border-top: 1px solid var(--line);
+            padding-top: 14px;
+        }
+
+        .about {
+            background: var(--paper);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-media img {
+            border-radius: var(--radius-md);
+            aspect-ratio: 1/1.05;
+            object-fit: cover;
+        }
+
+        .about h2 {
+            font-size: clamp(1.8rem, 3vw, 2.4rem);
+            font-weight: 700;
+        }
+
+        .about p.lead {
+            margin-top: 16px;
+            color: var(--ink-soft);
+            font-size: 1.05rem;
+        }
+
+        .check-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 28px;
+        }
+
+        .check-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            font-size: 0.96rem;
+        }
+
+        .check-item svg {
+            flex: none;
+            color: var(--teal);
+        }
+
+        .instr-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .instr-card {
+            text-align: center;
+        }
+
+        .instr-photo {
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            aspect-ratio: 1/1;
+            background: var(--paper);
+            margin-bottom: 16px;
+            border: 1px solid var(--line);
+        }
+
+        .instr-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .instr-card h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+        }
+
+        .instr-card .role {
+            color: var(--ink-soft);
+            font-size: 0.9rem;
+            margin-top: 4px;
+        }
+
+        .testimonials {
+            background: var(--ink);
+            color: var(--white);
+        }
+
+        .testimonials .section-head p {
+            color: rgba(255, 255, 255, 0.65);
+        }
+
+        .testimonials .eyebrow {
+            color: var(--gold);
+        }
+
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .test-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-md);
+            padding: 26px 22px;
+        }
+
+        .test-card p {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.82);
+        }
+
+        .test-who {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .test-who img {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: var(--paper);
+        }
+
+        .test-who h4 {
+            font-size: 0.94rem;
+            font-weight: 700;
+        }
+
+        .test-who span {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.55);
+        }
+
+        .newsletter {
+            background: var(--white);
+            border: 1px solid var(--line);
+            border-radius: 24px;
+            padding: 52px 56px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            margin: 0 auto;
+            max-width: var(--maxw);
+            box-shadow: 0 20px 50px rgba(20, 23, 31, 0.06);
+        }
+
+        .newsletter h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            max-width: 420px;
+        }
+
+        .newsletter p {
+            color: var(--ink-soft);
+            margin-top: 8px;
+        }
+
+        .news-form {
+            display: flex;
+            gap: 10px;
+        }
+
+        .news-form input {
+            padding: 14px 18px;
+            border-radius: 999px;
+            border: 1px solid var(--line);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            min-width: 250px;
+        }
+
+        footer {
+            background: #0e1712;
+            color: rgba(255, 255, 255, 0.8);
+            padding: 80px 0 30px;
+        }
+
+        .foot-grid {
+            display: grid;
+            grid-template-columns: 1.3fr 0.8fr 0.9fr 1fr;
+            gap: 40px;
+        }
+
+        .foot-logo {
+            font-family: 'Sora', sans-serif;
+            font-weight: 800;
+            font-size: 1.3rem;
+            color: var(--white);
+        }
+
+        footer p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.92rem;
+            margin-top: 14px;
+            max-width: 280px;
+        }
+
+        footer h4 {
+            color: var(--white);
+            font-size: 0.95rem;
+            margin-bottom: 18px;
+        }
+
+        footer ul li {
+            margin-bottom: 10px;
+            font-size: 0.92rem;
+        }
+
+        footer ul a {
+            color: rgba(255, 255, 255, 0.65);
+        }
+
+        footer ul a:hover {
+            color: var(--gold);
+        }
+
+        .foot-social {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .foot-social a {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .foot-social a:hover {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: #1a1206;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        .gallery-grid img {
+            border-radius: 8px;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+        }
+
+        .foot-bottom {
+            max-width: var(--maxw);
+            margin: 60px auto 0;
+            padding: 24px 28px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .hero-copy,
+        .hero-media {
+            opacity: 0;
+            transform: translateY(16px);
+            animation: rise .7s ease forwards;
+        }
+
+        .hero-media {
+            animation-delay: .12s;
+        }
+
+        @keyframes rise {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width:980px) {
+
+            .hero-grid,
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-media {
+                order: -1;
+            }
+
+            .float-card {
+                position: static;
+                margin-top: -40px;
+                margin-left: 20px;
+            }
+
+            .feature-grid,
+            .cat-grid,
+            .course-grid,
+            .instr-grid,
+            .test-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .feature {
+                border-left: none;
+                border-top: 1px solid var(--line);
+            }
+
+            .feature:first-child {
+                border-top: none;
+            }
+
+            .stat-strip .wrap {
+                grid-template-columns: repeat(2, 1fr);
+                row-gap: 24px;
+            }
+
+            .stat-item {
+                border-left: none;
+            }
+
+            .foot-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .newsletter {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 36px;
+            }
+
+            .news-form {
+                width: 100%;
+            }
+
+            .news-form input {
+                flex: 1;
+                min-width: 0;
+            }
+        }
+
+        @media (max-width:620px) {
+            section {
+                padding: 64px 0;
+            }
+
+            .feature-grid,
+            .cat-grid,
+            .course-grid,
+            .instr-grid,
+            .test-grid,
+            .foot-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-strip .wrap {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            .hero-copy,
+            .hero-media {
+                animation: none;
+                opacity: 1;
+                transform: none;
+            }
+
+            .cat-grid {
+                animation: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    {% include 'navbar.html' %}
+
+    <main id="top">
+        <section class="hero">
+            <div class="wrap hero-grid">
+                <div class="hero-copy">
+                    <span class="eyebrow">Education For All</span>
+                    <h1>Unlocking tech<br>education for <span>everyone</span></h1>
+                    <p class="lead">EduForAll is a digital portal dedicated to providing accessible, high-quality
+                        educational resources for learners and educators across Kenya and beyond — free lessons in Data
+                        Science, Cyber Security, AI, Web Development and Cloud Computing.</p>
+                    <div class="hero-ctas">
+                        <a class="btn btn-primary" href="/login/">Join Now</a>
+                        <a class="btn btn-ghost" href="/readmore/">Read More</a>
+                    </div>
+                </div>
+                <div class="hero-media">
+                    <div class="frame">
+                        <img src="https://media.istockphoto.com/id/1770759657/photo/black-and-mixed-race-student-using-digital-tablets-in-mathematics-class.jpg?s=612x612&w=0&k=20&c=DtKYKp2GhW69-0Hf7bTpe0uvgXoA00hgfwDnFrlQ3Xs="
+                            alt="Students using digital tablets in a mathematics class">
+                    </div>
+                    <div class="float-card">
+                        <span class="num">97+</span>
+                        <span class="lbl">Free courses across Data Science, Cyber Security, Cloud &amp; Web
+                            Development</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="stat-strip">
+            <div class="wrap">
+                <div class="stat-item">
+                    <div class="num">97+</div>
+                    <div class="lbl">Courses available</div>
+                </div>
+                <div class="stat-item">
+                    <div class="num">4</div>
+                    <div class="lbl">Skilled instructors</div>
+                </div>
+                <div class="stat-item">
+                    <div class="num">100%</div>
+                    <div class="lbl">Free to access</div>
+                </div>
+                <div class="stat-item">
+                    <div class="num">Kenya</div>
+                    <div class="lbl">&amp; beyond</div>
+                </div>
+            </div>
+        </div>
+
+        <section class="features">
+            <div class="wrap">
+                <div class="feature-grid">
+                    <div class="feature">
+                        <h3>Skilled Instructors</h3>
+                        <p>Learning is guided by passionate, highly skilled instructors who bring real‑world experience.
+                        </p>
+                        <a class="go" href="/instructor/">View instructors</a>
+                    </div>
+                    <div class="feature">
+                        <h3>Online Classes</h3>
+                        <p>Study anytime, anywhere, without sacrificing quality — every class is built for flexible
+                            learning.</p>
+                        <a class="go" href="/classes/">View classes</a>
+                    </div>
+                    <div class="feature">
+                        <h3>Certifications</h3>
+                        <p>Learners receive a digital certificate that validates their effort, skills and commitment to
+                            growth.</p>
+                        <a class="go" href="/certificate/">View certificates</a>
+                    </div>
+                    <div class="feature">
+                        <h3>Book Library</h3>
+                        <p>Access a rich collection of books, notes and learning materials, all in one place.</p>
+                        <a class="go" href="/books/">View library</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="categories" id="categories">
+            <div class="wrap">
+                <div class="section-head">
+                    <span class="eyebrow">Categories</span>
+                    <h2>Explore our course categories</h2>
+                    <p>Pick a track and start building real, job-ready skills at your own pace.</p>
+                </div>
+                <div class="category-marquee" aria-label="Course categories">
+                    <div class="cat-grid">
+                        <a class="cat-card" href="{% url 'classes' %}">
+                            <h3>Web Development</h3>
+                            <div class="count">12 Courses</div>
+                        </a>
+                        <a class="cat-card" href="{% url 'classes' %}">
+                            <h3>Cyber Security</h3>
+                            <div class="count">40 Courses</div>
+                        </a>
+                        <a class="cat-card" href="{% url 'classes' %}">
+                            <h3>Cloud Computing</h3>
+                            <div class="count">15 Courses</div>
+                        </a>
+                        <a class="cat-card" href="{% url 'classes' %}">
+                            <h3>Data Science</h3>
+                            <div class="count">30 Courses</div>
+                        </a>
+                        <a class="cat-card" href="{% url 'classes' %}" aria-hidden="true" tabindex="-1">
+                            <h3>Web Development</h3>
+                            <div class="count">12 Courses</div>
+                        </a>
+                        <a class="cat-card" href="{% url 'classes' %}" aria-hidden="true" tabindex="-1">
+                            <h3>Cyber Security</h3>
+                            <div class="count">40 Courses</div>
+                        </a>
+                        <a class="cat-card" href="{% url 'classes' %}" aria-hidden="true" tabindex="-1">
+                            <h3>Cloud Computing</h3>
+                            <div class="count">15 Courses</div>
+                        </a>
+                        <a class="cat-card" href="{% url 'classes' %}" aria-hidden="true" tabindex="-1">
+                            <h3>Data Science</h3>
+                            <div class="count">30 Courses</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="courses" id="courses">
+            <div class="wrap">
+                <div class="section-head">
+                    <span class="eyebrow">Courses</span>
+                    <h2>Popular courses</h2>
+                    <p>Hands-on, practical lessons taught by instructors with real industry experience.</p>
+                </div>
+                <div class="course-grid">
+                    <div class="course-card">
+                        <div class="course-thumb"><img
+                                src="https://media.gettyimages.com/id/547014185/photo/students-in-the-computer-science-class-cape-town-south-africa.jpg?s=612x612&w=0&k=20&c=skBKA4HeV9UFJi0U_sk586Z8wyUkDkFEPqtCtoMye84="
+                                alt="Students in a computer science class"></div>
+                        <div class="course-body">
+                            <span class="course-price">Ksh.51,410.00</span><span class="course-reviews">(432
+                                reviews)</span>
+                            <div class="course-title">Web Development Course for Beginners</div>
+                            <div class="course-meta"><span>Maxwell Gogo</span><span>2.49 Hrs</span><span>47
+                                    Students</span></div>
+                        </div>
+                    </div>
+                    <div class="course-card">
+                        <div class="course-thumb"><img
+                                src="https://media.gettyimages.com/id/659073051/photo/university-students-studying-in-classroom-school-bavaria-germany.jpg?s=612x612&w=0&k=20&c=T3lKafkRSeLxkH1tZfVTSuffPrMcm3BgKkEa8W0_WME="
+                                alt="University students studying in a classroom"></div>
+                        <div class="course-body">
+                            <span class="course-price">Ksh.86,490.00</span><span class="course-reviews">(153
+                                reviews)</span>
+                            <div class="course-title">Data Science, Analytics &amp; Analysis for Beginners</div>
+                            <div class="course-meta"><span>Isaac Tingo</span><span>4.49 Hrs</span><span>30
+                                    Students</span></div>
+                        </div>
+                    </div>
+                    <div class="course-card">
+                        <div class="course-thumb"><img
+                                src="https://media.gettyimages.com/id/547014181/photo/students-in-the-computer-science-class-cape-town-south-africa.jpg?s=612x612&w=0&k=20&c=pmlaF7LGJp5R9E-5MUIyy4yg_6p_pVQlaxKYv7tOjKM="
+                                alt="Students working together in class"></div>
+                        <div class="course-body">
+                            <span class="course-price">Ksh.65,000.00</span><span class="course-reviews">(98
+                                reviews)</span>
+                            <div class="course-title">Cloud Computing Essentials</div>
+                            <div class="course-meta"><span>Joan Mukura</span><span>3.20 Hrs</span><span>22
+                                    Students</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="about" id="about">
+            <div class="wrap about-grid">
+                <div class="about-media">
+                    <img src="https://img.freepik.com/free-photo/about-us-information-service-sharing-join-concept_53876-124056.jpg"
+                        alt="Community collaboration and knowledge sharing">
+                </div>
+                <div class="about-copy">
+                    <span class="eyebrow">About EduForAll</span>
+                    <h2>Welcome to EduForAll</h2>
+                    <p class="lead">Through innovative digital solutions, EduForAll delivers open educational resources
+                        that connect learners and educators, ensuring equitable access to knowledge across communities.
+                    </p>
+                    <div class="check-grid">
+                        <div class="check-item"><svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M4 10.5L8 14.5L16 5.5" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>Skilled Instructors</div>
+                        <div class="check-item"><svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M4 10.5L8 14.5L16 5.5" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>Online Classes</div>
+                        <div class="check-item"><svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M4 10.5L8 14.5L16 5.5" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>Certifications</div>
+                        <div class="check-item"><svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M4 10.5L8 14.5L16 5.5" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>Industry Skills</div>
+                        <div class="check-item"><svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M4 10.5L8 14.5L16 5.5" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>Learning Resources</div>
+                        <div class="check-item"><svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M4 10.5L8 14.5L16 5.5" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>Book Library</div>
+                    </div>
+                    <div class="hero-ctas">
+                        <a class="btn btn-gold" href="/readmore/">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="instructors">
+            <div class="wrap">
+                <div class="section-head">
+                    <span class="eyebrow">Instructors</span>
+                    <h2>Our instructors</h2>
+                    <p>Mentors and trainers with hands-on industry experience, guiding every learner personally.</p>
+                </div>
+                <div class="instr-grid">
+                    <div class="instr-card">
+                        <div class="instr-photo"><img
+                                src="https://eduforall-project-he81.onrender.com/static/img/instructors1.svg"
+                                alt="Steven Gogo"></div>
+                        <h3>Steven Gogo</h3>
+                        <div class="role">Senior Trainer</div>
+                    </div>
+                    <div class="instr-card">
+                        <div class="instr-photo"><img
+                                src="https://eduforall-project-he81.onrender.com/static/img/instructor2.svg"
+                                alt="Mavin Gogo"></div>
+                        <h3>Mavin Gogo</h3>
+                        <div class="role">Mentor</div>
+                    </div>
+                    <div class="instr-card">
+                        <div class="instr-photo"><img
+                                src="https://eduforall-project-he81.onrender.com/static/img/instructors1.svg"
+                                alt="Isaac Tingo"></div>
+                        <h3>Isaac Tingo</h3>
+                        <div class="role">Instructor</div>
+                    </div>
+                    <div class="instr-card">
+                        <div class="instr-photo"><img
+                                src="https://eduforall-project-he81.onrender.com/static/img/instructor2.svg"
+                                alt="Joan Mukura"></div>
+                        <h3>Joan Mukura</h3>
+                        <div class="role">Instructor</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="testimonials">
+            <div class="wrap">
+                <div class="section-head">
+                    <span class="eyebrow">Testimonial</span>
+                    <h2>Student voices</h2>
+                    <p>What learners say after building real skills through EduForAll.</p>
+                </div>
+                <div class="test-grid">
+                    <div class="test-card">
+                        <p>“EduForAll gave me the confidence to code and collaborate. The mentorship and resources
+                            helped me land my first internship.”</p>
+                        <div class="test-who"><img
+                                src="https://eduforall-project-he81.onrender.com/static/img/student1.svg" alt="">
+                            <div>
+                                <h4>Tabby Tamill</h4><span>Data Science Learner</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="test-card">
+                        <p>“I loved the hands-on approach. The instructors made complex topics simple, and I now feel
+                            ready to tackle real-world projects.”</p>
+                        <div class="test-who"><img
+                                src="https://eduforall-project-he81.onrender.com/static/img/student2.svg" alt="">
+                            <div>
+                                <h4>Lavin Gogo</h4><span>Cyber Security Learner</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="test-card">
+                        <p>“The community support was amazing. I didn't just learn skills, I built friendships and
+                            networks that will last a lifetime.”</p>
+                        <div class="test-who"><img
+                                src="https://eduforall-project-he81.onrender.com/static/img/student3.svg" alt="">
+                            <div>
+                                <h4>Mavin Klotz</h4><span>Cloud Computing Learner</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="test-card">
+                        <p>“Learning here wasn't just about skills — it was about belonging. Peer discussions and group
+                            projects taught me teamwork and leadership.”</p>
+                        <div class="test-who"><img
+                                src="https://eduforall-project-he81.onrender.com/static/img/testimonial-1.jpg" alt="">
+                            <div>
+                                <h4>Merittah Hannah</h4><span>Web Development Learner</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section style="padding-top:0;">
+            <div class="newsletter">
+                <div>
+                    <h3>Insights, opportunities, and stories delivered to your inbox</h3>
+                    <p>One short email a month. No spam, unsubscribe anytime.</p>
+                </div>
+                <form class="news-form" onsubmit="return false;">
+                    <input type="email" placeholder="Enter your email" required>
+                    <button class="btn btn-primary" type="submit">Sign Up</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="wrap foot-grid">
+            <div>
+                <div class="foot-logo">EduForAll</div>
+                <p>A digital portal delivering open, equitable educational resources for learners and educators across
+                    Kenya and beyond.</p>
+                <div class="foot-social">
+                    <a href="#" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                        </svg></a>
+                    <a href="#" aria-label="Twitter"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <path
+                                d="M22 4s-.7 2-2 3.2c1.4 8.6-7.6 14.9-15 10.4 2.4.1 4.8-.7 6.4-2.2-2.5-.1-4.3-1.7-5-3.9.8.2 1.6.1 2.3-.1-2.6-.5-4.3-2.8-4.3-5.2.7.4 1.5.6 2.3.7C4.8 5.6 4 3 5.2 1.3 8 4.6 12 6.6 16.3 6.8c-.7-3 2.9-5.4 5.4-3.4 1 0 2-.4 2.7-1-.3 1.1-1 2-2 2.6.9-.1 1.8-.3 2.6-.7-.6.9-1.4 1.7-2.3 2.4z" />
+                        </svg></a>
+                    <a href="#" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="18" height="18" rx="5" />
+                            <circle cx="12" cy="12" r="4" />
+                            <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" />
+                        </svg></a>
+                    <a href="#" aria-label="LinkedIn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="18" height="18" rx="2" />
+                            <path d="M7 10v7M7 7v.01M12 17v-4a2 2 0 0 1 4 0v4M12 13v4" />
+                        </svg></a>
+                </div>
+            </div>
+            <div>
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="/school">Contact Us</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms &amp; Conditions</a></li>
+                    <li><a href="#">FAQs &amp; Help</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Contact</h4>
+                <ul>
+                    <li>Nairobi, Kenya</li>
+                    <li>+254 746 781 552</li>
+                    <li>mavingogo065@gmail.com</li>
+                </ul>
+            </div>
+            <div>
+                <h4>Gallery</h4>
+                <div class="gallery-grid">
+                    <img src="https://media.gettyimages.com/id/1770728228/photo/girl-student-learning-to-use-desktop-pc-at-computer-class-in-school.jpg?s=612x612&w=0&k=20&c=xtbriIWTMSgrTvZ7FhjK144A4O6Yv8Tp12Ez2VxFzrM="
+                        alt="">
+                    <img src="https://media.gettyimages.com/id/1171003985/photo/male-teacher-explaining-female-student-at-desk.jpg?s=612x612&w=0&k=20&c=XJaMZF-h-mpr8_DkCCZ5NIAeXQh9t6aQjYDKGJc4hXg="
+                        alt="">
+                    <img src="https://media.gettyimages.com/id/2148731713/photo/happy-teenage-girl-using-smart-phone-while-sitting-with-friends.jpg?s=612x612&w=0&k=20&c=ZcF7YB6YqaMU7sJvqwd9p63kxg2Il75aQRlj9pdm0XY="
+                        alt="">
+                    <img src="https://media.gettyimages.com/id/547014185/photo/students-in-the-computer-science-class-cape-town-south-africa.jpg?s=612x612&w=0&k=20&c=skBKA4HeV9UFJi0U_sk586Z8wyUkDkFEPqtCtoMye84="
+                        alt="">
+                    <img src="https://media.gettyimages.com/id/2187877058/photo/teacher-girl-and-laptop-for-e-learning-in-library-with-education-support-information-and.jpg?s=612x612&w=0&k=20&c=nn4I4J60cM7W_2PNQsKFQxunuGOl0MmrWfA1OaCfK2E="
+                        alt="">
+                    <img src="https://media.gettyimages.com/id/1171003985/photo/male-teacher-explaining-female-student-at-desk.jpg?s=612x612&w=0&k=20&c=XJaMZF-h-mpr8_DkCCZ5NIAeXQh9t6aQjYDKGJc4hXg="
+                        alt="">
+                </div>
+            </div>
+        </div>
+        <div class="foot-bottom">
+            <span>© EduForAll. All rights reserved.</span>
+            <span>Home · Cookies · Help · FAQs</span>
+        </div>
+    </footer>
+
+</body>
+
+</html>

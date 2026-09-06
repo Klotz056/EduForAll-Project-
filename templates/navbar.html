@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-lg bg-dark navbar-light shadow sticky-top p-0">
-    <a href="/" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
-        <h2 class="m-0 text-info"><i class="fa-school + fa-handshake me-3"></i>EduForAll</h2>
+<nav class="navbar navbar-expand-lg navbar-light navbar-eduforall shadow-sm fixed-top p-0">
+    <a href="{% url 'school' %}" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+        <h2 class="m-0"><i class="fas fa-graduation-cap me-3"></i>EduForAll</h2>
     </a>
     <!-- <i class="fa fa-book me-3"></i> -->
     <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -8,47 +8,52 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav ms-auto p-4 p-lg-0">
-            <a href="{% url 'school' %}" class="nav-item nav-link text-info">Home</a>
-            {% if request.session.logged_in %}
-            <a href="{% url 'school' %}" class="nav-item nav-link text-info">Courses</a>
-            {% else %}
-            <a href="#courses.html" class="nav-item nav-link text-info">Courses</a>
-            {% endif %}
-            <a href="{% url 'school' %}" class="nav-item nav-link text-info">About</a>
+            <a href="{% url 'school' %}"
+                class="nav-item nav-link {% if request.resolver_match.url_name == 'school' or request.resolver_match.url_name == 'home' %}active{% endif %}">Home</a>
+            <a href="{% url 'classes' %}"
+                class="nav-item nav-link {% if request.resolver_match.url_name == 'classes' %}active{% endif %}">Courses</a>
+            <a href="{% url 'about' %}"
+                class="nav-item nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}">About</a>
             <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle text-info" data-bs-toggle="dropdown">Pages</a>
-                <div class="dropdown-menu fade-down m-0 bg-secondary">
-                    <a href="{% url 'instructor' %}" class="dropdown-item text-info">Instructors</a>
-                    <a href="{% url 'certificate' %}" class="dropdown-item text-info">Certifications</a>
-                    <a href="{% url 'books' %}" class="dropdown-item text-info">Learning Materials</a>
+                <a href="#"
+                    class="nav-link dropdown-toggle {% if request.resolver_match.url_name == 'instructor' or request.resolver_match.url_name == 'certificate' or request.resolver_match.url_name == 'books' %}active{% endif %}"
+                    data-bs-toggle="dropdown">Pages</a>
+                <div class="dropdown-menu fade-down m-0">
+                    <a href="{% url 'instructor' %}"
+                        class="dropdown-item {% if request.resolver_match.url_name == 'instructor' %}active{% endif %}">Instructors</a>
+                    <a href="{% url 'certificate' %}"
+                        class="dropdown-item {% if request.resolver_match.url_name == 'certificate' %}active{% endif %}">Certifications</a>
+                    <a href="{% url 'books' %}"
+                        class="dropdown-item {% if request.resolver_match.url_name == 'books' %}active{% endif %}">Learning
+                        Materials</a>
                 </div>
             </div>
-            <a href="{% url 'school' %}" class="nav-item nav-link text-info">Contact</a>
+            <a href="{% url 'contacts' %}"
+                class="nav-item nav-link {% if request.resolver_match.url_name == 'contacts' %}active{% endif %}">Contact</a>
         </div>
 
         <!-- Show different buttons based on login status -->
         {% if request.session.logged_in %}
         <div class="nav-item dropdown d-none d-lg-block">
-            <a href="#" class="nav-link dropdown-toggle bg-secondary text-white px-lg-4 py-4" data-bs-toggle="dropdown">
+            <a href="#" class="nav-link dropdown-toggle user-menu px-lg-4 py-4" data-bs-toggle="dropdown">
                 <i class="fa fa-user me-2"></i>{{ request.session.user_name }}
             </a>
-            <div class="dropdown-menu fade-down m-0 bg-secondary">
+            <div class="dropdown-menu fade-down m-0">
                 {% if request.session.user_role == 'student' %}
-                <a href="{% url 'student_dashboard' %}" class="dropdown-item text-info"><i
+                <a href="{% url 'student_dashboard' %}" class="dropdown-item"><i
                         class="fa fa-graduation-cap me-2"></i>My Dashboard</a>
-                <a href="{% url 'learning_center' %}" class="dropdown-item text-info"><i
-                        class="fa fa-book me-2"></i>Learning Center</a>
+                <a href="{% url 'learning_center' %}" class="dropdown-item"><i class="fa fa-book me-2"></i>Learning
+                    Center</a>
                 {% elif request.session.user_role == 'mentor' %}
-                <a href="{% url 'mentor_dashboard' %}" class="dropdown-item text-info"><i
+                <a href="{% url 'mentor_dashboard' %}" class="dropdown-item"><i
                         class="fa fa-chalkboard me-2"></i>Dashboard</a>
-                <a href="{% url 'mentor_course_list' %}" class="dropdown-item text-info"><i
-                        class="fa fa-list me-2"></i>My Courses</a>
-                <a href="{% url 'mentor_create_course' %}" class="dropdown-item text-info"><i
-                        class="fa fa-plus me-2"></i>Create Course</a>
+                <a href="{% url 'mentor_course_list' %}" class="dropdown-item"><i class="fa fa-list me-2"></i>My
+                    Courses</a>
+                <a href="{% url 'mentor_create_course' %}" class="dropdown-item"><i class="fa fa-plus me-2"></i>Create
+                    Course</a>
                 {% endif %}
                 <div class="dropdown-divider"></div>
-                <a href="{% url 'logout' %}" class="dropdown-item text-info"><i
-                        class="fa fa-sign-out-alt me-2"></i>Logout</a>
+                <a href="{% url 'logout' %}" class="dropdown-item"><i class="fa fa-sign-out-alt me-2"></i>Logout</a>
             </div>
         </div>
 
@@ -65,12 +70,12 @@
                     class="fa fa-sign-out-alt me-2"></i>Logout</a>
         </div>
         {% else %}
-        <a href="{% url 'login' %}" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block bg-secondary">Join Now<i
+        <a href="{% url 'login' %}" class="btn btn-gold join-btn py-0 px-lg-3 d-none d-lg-flex">Join Now<i
                 class="fa fa-arrow-right ms-3"></i></a>
 
         <!-- Mobile login button -->
         <div class="d-lg-none p-2 w-100">
-            <a href="{% url 'login' %}" class="btn btn-info w-100">Join Now</a>
+            <a href="{% url 'login' %}" class="btn btn-gold join-btn w-100">Join Now</a>
         </div>
         {% endif %}
     </div>

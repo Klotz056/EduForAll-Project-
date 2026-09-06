@@ -2,6 +2,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <title>Books - EduForAll</title>
@@ -10,7 +11,7 @@
     <meta content="" name="description">
 
     <!-- Favicon -->
-    <link href="{% static 'img/favicon.ico' %}" rel="icon">
+    <link href="{% static 'img/favicon.svg' %}" rel="icon" type="image/svg+xml">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,6 +30,7 @@
     <!-- Template Stylesheet -->
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
 </head>
+
 <body>
     {% include 'navbar.html' %}
     <div class="container my-5">
@@ -47,8 +49,8 @@
                             <img class="img-fluid" src="{% static 'img/book-1.jpg' %}" alt="">
                         </div>
                         <div class="position-relative d-flex justify-content-center" style="margin-top: -23px;">
-                        
-                        </div>  
+
+                        </div>
                         <div class="text-center p-4">
                             <h3 class="mb-0">Book Title 1</h3>
                         </div>
@@ -58,4 +60,5 @@
         </div>
     </div>
     {% include 'footer.html' %}
+
 </html>

@@ -10,7 +10,7 @@
     <meta content="" name="description">
 
     <!-- Favicon -->
-    <link href="{% static 'img/favicon.ico' %}" rel="icon">
+    <link href="{% static 'img/favicon.svg' %}" rel="icon" type="image/svg+xml">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -287,205 +287,211 @@
                 <i class="fas fa-user-circle me-2"></i>
                 {{ user_role|capfirst }} Account
                 {% endif %}
+            </div>
         </div>
-    </div>
 
-    <!-- Learning Content -->
-    <div class="learning-container">
-        <div class="container">
-            <!-- Welcome Section -->
-            <div class="welcome-section">
-                {% if user_role == 'student' %}
-                <h2 class=""><i class="fas fa-book me-2 text-dark"></i>Your Learning Dashboard</h2>
-                <p>Explore our extensive collection of courses, connect with mentors, and enhance your skills. You're
-                    all set to begin your learning adventure!</p>
-                {% else %}
-                <h2 class=""><i class="fas fa-chalkboard-user me-2 text-dark"></i>Your Mentor Dashboard</h2>
-                <p>As a mentor, you have the power to shape the future of learners. Create impactful courses, share your
-                    expertise, and inspire the next generation of professionals.</p>
-                {% endif %}
-
-
-                <div class="action-buttons">
+        <!-- Learning Content -->
+        <div class="learning-container">
+            <div class="container">
+                <!-- Welcome Section -->
+                <div class="welcome-section">
                     {% if user_role == 'student' %}
-                    <a href="#courses" class="btn-action btn-primary-action">
-                        <i class="fas fa-book-open me-2"></i>Browse Courses
-                    </a>
+                    <h2 class=""><i class="fas fa-book me-2 text-dark"></i>Your Learning Dashboard</h2>
+                    <p>Explore our extensive collection of courses, connect with mentors, and enhance your skills.
+                        You're
+                        all set to begin your learning adventure!</p>
                     {% else %}
-                    <a href="" class="btn-action btn-primary-action">
-                        <i class="fas fa-plus me-2"></i>Create Course
-                    </a>
+                    <h2 class=""><i class="fas fa-chalkboard-user me-2 text-dark"></i>Your Mentor Dashboard</h2>
+                    <p>As a mentor, you have the power to shape the future of learners. Create impactful courses, share
+                        your
+                        expertise, and inspire the next generation of professionals.</p>
                     {% endif %}
-                    <a href="{% url 'dashboard' %}" class="btn-action btn-primary-action">
-                        <i class="fas fa-user me-2"></i>View Profile
-                    </a>
-                    <a href="{% url 'school' %}" class="btn-action btn-primary-action">
-                        <i class="fas fa-home me-2"></i>Back to Home
-                    </a>
-                </div>
-            </div>
 
-            <!-- Statistics -->
-            <div class="row mb-5">
-                <div class="col-md-4">
-                    <div class="stat-box">
-                        <div class="stat-number">{{ course|length }}</div>
-                        <div class="stat-label">Available Courses</div>
+
+                    <div class="action-buttons">
+                        {% if user_role == 'student' %}
+                        <a href="#courses" class="btn-action btn-primary-action">
+                            <i class="fas fa-book-open me-2"></i>Browse Courses
+                        </a>
+                        {% else %}
+                        <a href="" class="btn-action btn-primary-action">
+                            <i class="fas fa-plus me-2"></i>Create Course
+                        </a>
+                        {% endif %}
+                        <a href="{% url 'dashboard' %}" class="btn-action btn-primary-action">
+                            <i class="fas fa-user me-2"></i>View Profile
+                        </a>
+                        <a href="{% url 'school' %}" class="btn-action btn-primary-action">
+                            <i class="fas fa-home me-2"></i>Back to Home
+                        </a>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="stat-box">
-                        <div class="stat-number">1</div>
-                        <div class="stat-label">Your Account</div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="stat-box">
-                        <div class="stat-number">∞</div>
-                        <div class="stat-label">Learning Potential</div>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Courses Section -->
-            {% if user_role == 'student' %}
-            <div id="courses">
-                <h3 class="section text-center text-dark"><i class="fas"></i>Available Courses</h3>
-
-                {% if course %}
-                <div class="course-grid">
-                    {% for course in courses %}
-                    <div class="course-card">
-                        <div class="course-image ">
-                            <i class="fas fa-book"></i>
+                <!-- Statistics -->
+                <div class="row mb-5">
+                    <div class="col-md-4">
+                        <div class="stat-box">
+                            <div class="stat-number">{{ course|length }}</div>
+                            <div class="stat-label">Available Courses</div>
                         </div>
-                        <div class="course-body">
-                            <h5>{{ course.title }}</h5>
-                            <p>{{ course.description|truncatewords:10 }}</p>
-                            <div class="course-footer">
-                                <small><i class="fas fa-user me-1"></i>{{ course.instructor.first_name }}</small>
-                                <a href="#" class="btn-enroll"><i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="stat-box">
+                            <div class="stat-number">1</div>
+                            <div class="stat-label">Your Account</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="stat-box">
+                            <div class="stat-number">∞</div>
+                            <div class="stat-label">Learning Potential</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Courses Section -->
+                {% if user_role == 'student' %}
+                <div id="courses">
+                    <h3 class="section text-center text-dark"><i class="fas"></i>Available Courses</h3>
+
+                    {% if course %}
+                    <div class="course-grid">
+                        {% for course in courses %}
+                        <div class="course-card">
+                            <div class="course-image ">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <div class="course-body">
+                                <h5>{{ course.title }}</h5>
+                                <p>{{ course.description|truncatewords:10 }}</p>
+                                <div class="course-footer">
+                                    <small><i class="fas fa-user me-1"></i>{{ course.instructor.first_name }}</small>
+                                    <a href="#" class="btn-enroll"><i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <div class="empty-courses">
+                        <i class="fas fa-inbox" style="font-size: 3rem; margin-bottom: 20px; display: block;"></i>
+                        <p>No courses available yet. Check back soon!</p>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <!-- Features Section -->
+                <div class="mt-5">
+                    <h3 class="section text-center text-da"><i class="fas"></i>Why Choose EduForAll?</h3>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <i class="fas fa-video"></i>
+                                </div>
+                                <h4>Interactive Learning</h4>
+                                <p>Engage with high-quality course content, videos, and interactive exercises designed
+                                    to
+                                    enhance your learning experience.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <h4>Expert Mentors</h4>
+                                <p>Learn from experienced mentors in your field. Get guidance, feedback, and
+                                    personalized
+                                    support throughout your journey.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <i class="fas fa-certificate"></i>
+                                </div>
+                                <h4>Certification</h4>
+                                <p>Earn recognized certificates upon course completion. Showcase your achievements and
+                                    skills to potential employers.</p>
                             </div>
                         </div>
                     </div>
-                    {% endfor %}
                 </div>
+
                 {% else %}
-                <div class="empty-courses">
-                    <i class="fas fa-inbox" style="font-size: 3rem; margin-bottom: 20px; display: block;"></i>
-                    <p>No courses available yet. Check back soon!</p>
+                <!-- Mentor Features -->
+                <div>
+                    <h2 class="section-title"><i class="fas fa-chalkboard-user me-2"></i>Mentor Dashboard</h2>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <i class="fas fa-plus-circle"></i>
+                                </div>
+                                <h4>Create Courses</h4>
+                                <p>Share your expertise by creating and publishing courses. Reach thousands of learners
+                                    around the world.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <h4>Track Progress</h4>
+                                <p>Monitor student progress and engagement. Get detailed analytics on course performance
+                                    and
+                                    student achievements.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <i class="fas fa-comments"></i>
+                                </div>
+                                <h4>Student Interactions</h4>
+                                <p>Engage directly with your students through messages, forums, and Q&A sessions to
+                                    support
+                                    their learning.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <h4>Build Your Brand</h4>
+                                <p>Establish yourself as an authority in your field and build a community of engaged
+                                    learners.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 {% endif %}
             </div>
-
-            <!-- Features Section -->
-            <div class="mt-5">
-                <h3 class="section text-center text-da"><i class="fas"></i>Why Choose EduForAll?</h3>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="feature-card">
-                            <div class="feature-icon">
-                                <i class="fas fa-video"></i>
-                            </div>
-                            <h4>Interactive Learning</h4>
-                            <p>Engage with high-quality course content, videos, and interactive exercises designed to
-                                enhance your learning experience.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="feature-card">
-                            <div class="feature-icon">
-                                <i class="fas fa-users"></i>
-                            </div>
-                            <h4>Expert Mentors</h4>
-                            <p>Learn from experienced mentors in your field. Get guidance, feedback, and personalized
-                                support throughout your journey.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="feature-card">
-                            <div class="feature-icon">
-                                <i class="fas fa-certificate"></i>
-                            </div>
-                            <h4>Certification</h4>
-                            <p>Earn recognized certificates upon course completion. Showcase your achievements and
-                                skills to potential employers.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            {% else %}
-            <!-- Mentor Features -->
-            <div>
-                <h2 class="section-title"><i class="fas fa-chalkboard-user me-2"></i>Mentor Dashboard</h2>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="feature-card">
-                            <div class="feature-icon">
-                                <i class="fas fa-plus-circle"></i>
-                            </div>
-                            <h4>Create Courses</h4>
-                            <p>Share your expertise by creating and publishing courses. Reach thousands of learners
-                                around the world.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="feature-card">
-                            <div class="feature-icon">
-                                <i class="fas fa-chart-line"></i>
-                            </div>
-                            <h4>Track Progress</h4>
-                            <p>Monitor student progress and engagement. Get detailed analytics on course performance and
-                                student achievements.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row mt-4">
-                    <div class="col-md-6">
-                        <div class="feature-card">
-                            <div class="feature-icon">
-                                <i class="fas fa-comments"></i>
-                            </div>
-                            <h4>Student Interactions</h4>
-                            <p>Engage directly with your students through messages, forums, and Q&A sessions to support
-                                their learning.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="feature-card">
-                            <div class="feature-icon">
-                                <i class="fas fa-star"></i>
-                            </div>
-                            <h4>Build Your Brand</h4>
-                            <p>Establish yourself as an authority in your field and build a community of engaged
-                                learners.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {% endif %}
         </div>
-    </div>
 
-    <!-- Footer Start -->
-    {% include 'footer.html' %}
-    <!-- Footer End -->
+        <!-- Footer Start -->
+        {% include 'footer.html' %}
+        <!-- Footer End -->
 
-    <!-- Back to Top -->
-    <a href="#" class="btn btn-lg btn-info btn-lg-rounded back-to-top"><i class="bi bi-arrow-up"></i></a>
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-info btn-lg-rounded back-to-top"><i class="bi bi-arrow-up"></i></a>
 
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="{% static 'lib/wow/wow.min.js' %}"></script>
-    <script src="{% static 'lib/easing/easing.min.js' %}"></script>
-    <script src="{% static 'lib/waypoints/waypoints.min.js' %}"></script>
-    <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="{% static 'lib/wow/wow.min.js' %}"></script>
+        <script src="{% static 'lib/easing/easing.min.js' %}"></script>
+        <script src="{% static 'lib/waypoints/waypoints.min.js' %}"></script>
+        <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
 
-    <!-- Template Javascript -->
-    <script src="{% static 'js/main.js' %}"></script>
+        <!-- Template Javascript -->
+        <script src="{% static 'js/main.js' %}"></script>
 </body>
 
 </html>

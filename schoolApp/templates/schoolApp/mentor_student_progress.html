@@ -1,18 +1,21 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <title>Student Progress - EduForAll</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
     <!-- Favicon -->
-    <link href="{% static 'img/favicon.ico' %}" rel="icon">
+    <link href="{% static 'img/favicon.svg' %}" rel="icon" type="image/svg+xml">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap"
+        rel="stylesheet">
 
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
@@ -134,6 +137,7 @@
         }
     </style>
 </head>
+
 <body>
     {% include 'navbar.html' %}
 
@@ -169,7 +173,8 @@
                     <p><strong>Enrollment Type:</strong> {{ enrollment.get_enrollment_type_display }}</p>
                 </div>
                 <div class="col-md-6">
-                    <p><strong>Status:</strong> <span class="badge bg-info">{{ enrollment.get_status_display }}</span></p>
+                    <p><strong>Status:</strong> <span class="badge bg-info">{{ enrollment.get_status_display }}</span>
+                    </p>
                     <p><strong>Enrolled Date:</strong> {{ enrollment.enrollment_date|date:"M d, Y" }}</p>
                 </div>
             </div>
@@ -180,7 +185,7 @@
             <h3 class="section-title">
                 <i class="fa fa-chart-line me-2"></i>Learning Progress
             </h3>
-            
+
             <div>
                 <label class="d-block mb-2"><strong>Overall Progress: {{ enrollment.progress }}%</strong></label>
                 <div class="progress-bar">
@@ -208,9 +213,9 @@
                 <div class="stat-box">
                     <div class="stat-value">
                         {% if learning_path.last_accessed %}
-                            Recently
+                        Recently
                         {% else %}
-                            Not yet
+                        Not yet
                         {% endif %}
                     </div>
                     <div class="stat-label">Last Accessed</div>
@@ -228,30 +233,23 @@
                 <div class="col-md-6">
                     <p><strong>Current Level:</strong></p>
                     <p>
-                        {% if enrollment.progress < 25 %}
-                            <span class="badge bg-warning">Beginner</span>
-                        {% elif enrollment.progress < 50 %}
-                            <span class="badge bg-info">Intermediate</span>
-                        {% elif enrollment.progress < 75 %}
-                            <span class="badge bg-primary">Advanced</span>
-                        {% else %}
-                            <span class="badge bg-success">Expert</span>
-                        {% endif %}
+                        {% if enrollment.progress < 25 %} <span class="badge bg-warning">Beginner</span>
+                            {% elif enrollment.progress < 50 %} <span class="badge bg-info">Intermediate</span>
+                                {% elif enrollment.progress < 75 %} <span class="badge bg-primary">Advanced</span>
+                                    {% else %}
+                                    <span class="badge bg-success">Expert</span>
+                                    {% endif %}
                     </p>
                 </div>
                 <div class="col-md-6">
                     <p><strong>Recommendation:</strong></p>
                     <p class="text-muted">
-                        {% if enrollment.progress < 25 %}
-                            Student is just getting started. Provide encouragement and guide through fundamentals.
-                        {% elif enrollment.progress < 50 %}
-                            Good progress! Continue with intermediate topics and offer support as needed.
-                        {% elif enrollment.progress < 75 %}
-                            Excellent work! Student is ready for advanced concepts and real-world applications.
-                        {% else %}
-                            Outstanding performance! Consider assigning projects or mentoring other students.
-                        {% endif %}
-                    </p>
+                        {% if enrollment.progress < 25 %} Student is just getting started. Provide encouragement and
+                            guide through fundamentals. {% elif enrollment.progress < 50 %} Good progress! Continue with
+                            intermediate topics and offer support as needed. {% elif enrollment.progress < 75 %}
+                            Excellent work! Student is ready for advanced concepts and real-world applications. {% else
+                            %} Outstanding performance! Consider assigning projects or mentoring other students. {%
+                            endif %} </p>
                 </div>
             </div>
         </div>
@@ -263,4 +261,5 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 </body>
+
 </html>
