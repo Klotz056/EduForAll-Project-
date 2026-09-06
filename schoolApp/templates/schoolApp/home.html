@@ -7,6 +7,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>EduForAll — Unlocking Tech Education for Everyone</title>
     <link href="{% static 'img/favicon.svg' %}" rel="icon" type="image/svg+xml">
+    <meta name="description"
+        content="EduForAll provides accessible, high-quality technology education and practical learning resources for learners across Kenya and beyond.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ request.scheme }}://{{ request.get_host }}{% url 'school' %}">
+    <meta property="og:title" content="EduForAll - Unlocking Tech Education for Everyone">
+    <meta property="og:description"
+        content="Explore accessible technology education, practical courses, and learning resources from EduForAll.">
+    <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'img/favicon.svg' %}">
+    <meta property="og:image:alt" content="EduForAll graduation cap logo">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="EduForAll - Unlocking Tech Education for Everyone">
+    <meta name="twitter:description"
+        content="Explore accessible technology education, practical courses, and learning resources from EduForAll.">
+    <meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'img/favicon.svg' %}">
+    <meta name="twitter:image:alt" content="EduForAll graduation cap logo">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
