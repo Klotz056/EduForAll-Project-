@@ -1587,41 +1587,185 @@ h6,
 }
 
 /* Latest student dashboard presentation */
-.student-dashboard-page .dashboard-header { padding: 64px 0 44px !important; margin-bottom: 40px !important; border-radius: 0 0 22px 22px !important; }
-.student-dashboard-page .dashboard-header::after { display: none; }
-.student-dashboard-page .welcome-message { font-size: 1.1rem !important; margin-bottom: 8px !important; }
-.student-dashboard-page .dashboard-title { font-size: clamp(1.7rem, 3.4vw, 2.4rem) !important; }
-.student-dashboard-page .dashboard-container { padding: 0 0 60px !important; }
-.student-dashboard-page .stats-grid { gap: 18px; margin-bottom: 44px; }
-.student-dashboard-page .stat-card { border-left: 4px solid var(--student-teal) !important; border-top: 0 !important; padding: 26px 22px !important; }
-.student-dashboard-page .stat-card:nth-child(2n) { border-left-color: var(--student-gold) !important; }
-.student-dashboard-page .stat-icon { width: 46px; height: 46px; border-radius: 12px; background: var(--student-teal-soft) !important; color: var(--student-teal) !important; display: flex; align-items: center; justify-content: center; font-size: 1.3rem !important; margin-bottom: 16px !important; }
-.student-dashboard-page .stat-number { font-size: 1.9rem !important; margin-bottom: 4px !important; }
-.student-dashboard-page .progress-bar { height: 22px !important; border-radius: 999px !important; background: var(--student-offwhite) !important; }
-.student-dashboard-page .course-card { border-top: 4px solid var(--student-teal) !important; margin-bottom: 22px !important; }
-.student-dashboard-page .course-header { background: var(--student-teal-soft) !important; color: var(--student-ink) !important; padding: 22px 24px !important; }
-.student-dashboard-page .course-title { color: var(--student-ink) !important; font-size: 1.2rem !important; }
-.student-dashboard-page .course-instructor { color: var(--student-teal) !important; }
-.student-dashboard-page .course-body { padding: 22px 24px !important; }
-.student-dashboard-page .course-meta { gap: 16px; margin-bottom: 15px; }
-.student-dashboard-page .progress-section { margin: 20px 0 !important; }
-.student-dashboard-page .course-actions { margin-top: 16px; }
-.student-dashboard-page .btn-action { padding: 11px 15px !important; border-radius: 7px !important; }
-.student-dashboard-page .btn-message { background: var(--student-white) !important; color: var(--student-ink) !important; border: 1.5px solid #d8dae0 !important; }
-.student-dashboard-page .btn-message:hover { background: var(--student-ink) !important; color: var(--student-white) !important; border-color: var(--student-ink) !important; }
-.student-dashboard-page .empty-state { padding: 60px 20px !important; }
-.student-dashboard-page .empty-icon { width: 76px; height: 76px; border-radius: 50%; background: var(--student-gold-soft); color: var(--student-gold) !important; display: flex; align-items: center; justify-content: center; font-size: 2.1rem; margin: 0 auto 22px; }
-.student-dashboard-page .empty-text { color: var(--student-ink) !important; margin-bottom: 8px !important; }
-.student-dashboard-page .status-completed { background: var(--student-teal) !important; color: var(--student-white) !important; }
-.student-dashboard-page .badge.bg-primary { background: var(--student-teal-soft) !important; color: var(--student-teal) !important; }
-.student-dashboard-page .badge.bg-success { background: var(--student-gold-soft) !important; color: #8a6a1f !important; }
-.student-dashboard-page .alert-info { background: var(--student-teal-soft) !important; border: 0 !important; border-left: 3px solid var(--student-teal) !important; color: var(--student-ink) !important; }
-.student-dashboard-page .alert-success { background: var(--student-gold-soft) !important; border: 0 !important; border-left: 3px solid var(--student-gold) !important; color: var(--student-ink) !important; }
+.student-dashboard-page .dashboard-header {
+    padding: 64px 0 44px !important;
+    margin-bottom: 40px !important;
+    border-radius: 0 0 22px 22px !important;
+}
+
+.student-dashboard-page .dashboard-header::after {
+    display: none;
+}
+
+.student-dashboard-page .welcome-message {
+    font-size: 1.1rem !important;
+    margin-bottom: 8px !important;
+}
+
+.student-dashboard-page .dashboard-title {
+    font-size: clamp(1.7rem, 3.4vw, 2.4rem) !important;
+}
+
+.student-dashboard-page .dashboard-container {
+    padding: 0 0 60px !important;
+}
+
+.student-dashboard-page .stats-grid {
+    gap: 18px;
+    margin-bottom: 44px;
+}
+
+.student-dashboard-page .stat-card {
+    border-left: 4px solid var(--student-teal) !important;
+    border-top: 0 !important;
+    padding: 26px 22px !important;
+}
+
+.student-dashboard-page .stat-card:nth-child(2n) {
+    border-left-color: var(--student-gold) !important;
+}
+
+.student-dashboard-page .stat-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    background: var(--student-teal-soft) !important;
+    color: var(--student-teal) !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem !important;
+    margin-bottom: 16px !important;
+}
+
+.student-dashboard-page .stat-number {
+    font-size: 1.9rem !important;
+    margin-bottom: 4px !important;
+}
+
+.student-dashboard-page .progress-bar {
+    height: 22px !important;
+    border-radius: 999px !important;
+    background: var(--student-offwhite) !important;
+}
+
+.student-dashboard-page .course-card {
+    border-top: 4px solid var(--student-teal) !important;
+    margin-bottom: 22px !important;
+}
+
+.student-dashboard-page .course-header {
+    background: var(--student-teal-soft) !important;
+    color: var(--student-ink) !important;
+    padding: 22px 24px !important;
+}
+
+.student-dashboard-page .course-title {
+    color: var(--student-ink) !important;
+    font-size: 1.2rem !important;
+}
+
+.student-dashboard-page .course-instructor {
+    color: var(--student-teal) !important;
+}
+
+.student-dashboard-page .course-body {
+    padding: 22px 24px !important;
+}
+
+.student-dashboard-page .course-meta {
+    gap: 16px;
+    margin-bottom: 15px;
+}
+
+.student-dashboard-page .progress-section {
+    margin: 20px 0 !important;
+}
+
+.student-dashboard-page .course-actions {
+    margin-top: 16px;
+}
+
+.student-dashboard-page .btn-action {
+    padding: 11px 15px !important;
+    border-radius: 7px !important;
+}
+
+.student-dashboard-page .btn-message {
+    background: var(--student-white) !important;
+    color: var(--student-ink) !important;
+    border: 1.5px solid #d8dae0 !important;
+}
+
+.student-dashboard-page .btn-message:hover {
+    background: var(--student-ink) !important;
+    color: var(--student-white) !important;
+    border-color: var(--student-ink) !important;
+}
+
+.student-dashboard-page .empty-state {
+    padding: 60px 20px !important;
+}
+
+.student-dashboard-page .empty-icon {
+    width: 76px;
+    height: 76px;
+    border-radius: 50%;
+    background: var(--student-gold-soft);
+    color: var(--student-gold) !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.1rem;
+    margin: 0 auto 22px;
+}
+
+.student-dashboard-page .empty-text {
+    color: var(--student-ink) !important;
+    margin-bottom: 8px !important;
+}
+
+.student-dashboard-page .status-completed {
+    background: var(--student-teal) !important;
+    color: var(--student-white) !important;
+}
+
+.student-dashboard-page .badge.bg-primary {
+    background: var(--student-teal-soft) !important;
+    color: var(--student-teal) !important;
+}
+
+.student-dashboard-page .badge.bg-success {
+    background: var(--student-gold-soft) !important;
+    color: #8a6a1f !important;
+}
+
+.student-dashboard-page .alert-info {
+    background: var(--student-teal-soft) !important;
+    border: 0 !important;
+    border-left: 3px solid var(--student-teal) !important;
+    color: var(--student-ink) !important;
+}
+
+.student-dashboard-page .alert-success {
+    background: var(--student-gold-soft) !important;
+    border: 0 !important;
+    border-left: 3px solid var(--student-gold) !important;
+    color: var(--student-ink) !important;
+}
 
 @media (max-width: 768px) {
-    .student-dashboard-page .dashboard-header { padding: 44px 0 40px !important; }
-    .student-dashboard-page .stats-grid { grid-template-columns: repeat(2, 1fr); }
-    .student-dashboard-page .dashboard-title { font-size: 1.8rem !important; }
+    .student-dashboard-page .dashboard-header {
+        padding: 44px 0 40px !important;
+    }
+
+    .student-dashboard-page .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .student-dashboard-page .dashboard-title {
+        font-size: 1.8rem !important;
+    }
 }
 
 /* Course detail, course listing, and enrollment pages */
