@@ -53,7 +53,7 @@ def login_view(request):
         return redirect('learning_center')
     
     if request.method == 'POST':
-        email = request.POST.get('email', '').strip()
+        email = request.POST.get('email', '').strip().lower()
         password = request.POST.get('password', '')
         role = request.POST.get('role', '').lower()
         remember_me = request.POST.get('remember_me', False)
@@ -120,7 +120,7 @@ def register_view(request):
     if request.method == 'POST':
         first_name = request.POST.get('first_name', '').strip()
         last_name = request.POST.get('last_name', '').strip()
-        email = request.POST.get('email', '').strip()
+        email = request.POST.get('email', '').strip().lower()
         phone_number = request.POST.get('phone_number', '').strip()
         password = request.POST.get('password', '')
         confirm_password = request.POST.get('confirm_password', '')

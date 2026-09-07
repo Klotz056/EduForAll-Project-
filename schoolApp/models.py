@@ -63,6 +63,10 @@ class Student(models.Model):
     def set_password(self, raw_password):
         self.password = make_password(raw_password)
 
+    def save(self, *args, **kwargs):
+        self.email = self.email.lower()
+        super().save(*args, **kwargs)
+
     def check_password(self, raw_password):
         return check_password(raw_password, self.password)
 
@@ -82,6 +86,10 @@ class Mentor(models.Model):
 
     def set_password(self, raw_password):
         self.password = make_password(raw_password)
+
+    def save(self, *args, **kwargs):
+        self.email = self.email.lower()
+        super().save(*args, **kwargs)
 
     def check_password(self, raw_password):
         return check_password(raw_password, self.password)
