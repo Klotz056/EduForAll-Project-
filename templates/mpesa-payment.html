@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="utf-8">
+    <title>EduForAll</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+    <link rel="shortcut icon" href="assets/svg/logo.svg" type="image/x-icon">
+
+    <!-- Favicon -->
+    <link href="{% static 'img/favicon.svg' %}" rel="icon" type="image/svg+xml">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="{% static 'lib/animate/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Spinner Start -->
+    <!-- <div id="spinner"
+        class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>  -->
+    <!-- Spinner End -->
+
+
+    <!-- Navbar Start -->
+    {% include 'navbar.html' %}
+
+    {% block content %}
+
+
+
+    <style>
+        .container {
+            --white: #ffffff;
+            --offwhite: #f7f6f2;
+            --ink: #14171f;
+            --ink-muted: #5b6270;
+            --gold: #e2a63b;
+            --teal: #0f5c46;
+            --teal-dark: #0b4636;
+            --teal-050: #e7f2ee;
+            --red: #b3261e;
+            --red-050: #fbeceb;
+            --radius-lg: 14px;
+            --radius-md: 10px;
+            --shadow-sm: 0 1px 3px rgba(20, 23, 31, 0.06);
+            --ease: cubic-bezier(.4, 0, .2, 1);
+        }
+
+        .mpesa-box {
+            max-width: 420px;
+            margin: 40px auto;
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            border-top: 4px solid var(--teal);
+            padding: 32px 30px;
+        }
+
+        .mpesa-box h3 {
+            font-family: 'Sora', sans-serif;
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: var(--ink);
+            margin: 0 0 22px 0;
+        }
+
+        .mpesa-box .mb-3 {
+            margin-bottom: 18px;
+        }
+
+        .mpesa-box .form-label {
+            font-weight: 600;
+            font-size: 0.88rem;
+            color: var(--ink);
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .mpesa-box .form-control {
+            width: 100%;
+            border: 1.5px solid #dfe2e6;
+            border-radius: var(--radius-md);
+            padding: 11px 14px;
+            font-size: 0.95rem;
+            color: var(--ink);
+            background: var(--white);
+            transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
+        }
+
+        .mpesa-box .form-control:focus {
+            outline: none;
+            border-color: var(--teal);
+            box-shadow: 0 0 0 3px var(--teal-050);
+        }
+
+        .mpesa-box .form-text {
+            color: var(--ink-muted);
+            font-size: 0.8rem;
+            margin-top: 6px;
+        }
+
+        .mpesa-box .btn-primary {
+            width: 100%;
+            background: var(--teal);
+            border: none;
+            color: var(--white);
+            padding: 13px 20px;
+            border-radius: var(--radius-md);
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 6px;
+            box-shadow: 0 8px 18px rgba(15, 92, 70, 0.24);
+            transition: all 0.2s var(--ease);
+        }
+
+        .mpesa-box .btn-primary:hover {
+            background: var(--teal-dark);
+            transform: translateY(-2px);
+        }
+
+        .mpesa-box .alert-msg {
+            padding: 12px 16px;
+            border-radius: var(--radius-md);
+            font-size: 0.9rem;
+            margin-bottom: 18px;
+        }
+
+        .mpesa-box .alert-error {
+            background: var(--red-050);
+            color: var(--red);
+            border-left: 3px solid var(--red);
+        }
+
+        .mpesa-box .alert-success {
+            background: var(--teal-050);
+            color: var(--teal);
+            border-left: 3px solid var(--teal);
+        }
+    </style>
+
+    <!-- <div class="container">
+        <div class="mpesa-box">
+            <h3>Make Payment</h3>
+
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert-msg {% if message.tags == 'error' %}alert-error{% else %}alert-success{% endif %}">
+                {{ message }}
+            </div>
+            {% endfor %}
+            {% endif %}
+
+            <form action="{% url 'mpesaPay' %}" method="POST">
+                {% csrf_token %}
+
+                <div class="mb-3">
+                    <label for="phone_number" class="form-label">M-Pesa phone number</label>
+                    <input type="tel" class="form-control" id="phone_number" name="phone_number"
+                        placeholder="07XX XXX XXX" pattern="0[0-9]{9}" required>
+                    <div class="form-text">You'll get an STK push prompt on this number to enter your PIN.</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="amount" class="form-label">Amount (Ksh)</label>
+                    <input type="number" class="form-control" id="amount" name="amount" min="1" step="1" placeholder="0"
+                        required>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Pay with M-Pesa</button>
+            </form>
+        </div>
+    </div> -->
+
+
+    <div class="container">
+        <div class="mpesa-box">
+            <h3>Make Payment</h3>
+
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert-msg {% if message.tags == 'error' %}alert-error{% else %}alert-success{% endif %}">
+                {{ message }}
+            </div>
+            {% endfor %}
+            {% endif %}
+
+            <form id="mpesaForm" action="{% url 'mpesaPay' %}" method="POST">
+                {% csrf_token %}
+
+                <div class="mb-3">
+                    <label for="course" class="form-label">Select course</label>
+                    <select class="form-control" id="course" name="course_id" required>
+                        <option value="" disabled selected>-- Choose a course --</option>
+                        {% for course in courses %}
+                        <option value="{{ course.id }}" data-fee="{{ course.price }}">
+                            {{ course.title }}
+                        </option>
+                        {% empty %}
+                        <option value="" disabled>No paid courses are available</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Course fee</label>
+                    <div class="form-control" id="feeDisplay" style="background:#f8f9fa;">
+                        Ksh 0
+                    </div>
+                    <!-- Actual amount sent to the server; kept in sync with the selected course -->
+                    <input type="hidden" id="amount" name="amount" value="0">
+                </div>
+
+                <div class="mb-3">
+                    <label for="phone_number" class="form-label">M-Pesa phone number</label>
+                    <input type="tel" class="form-control" id="phone_number" name="phone_number"
+                        placeholder="07XX XXX XXX" pattern="0[0-9]{9}" required>
+                    <div class="form-text">You'll get an STK push prompt on this number to enter your PIN.</div>
+                </div>
+
+                <button type="submit" class="btn btn-primary" id="payBtn">Pay with M-Pesa</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Payment status modal -->
+    <div id="paymentModal" class="payment-modal-overlay" style="display:none;">
+        <div class="payment-modal">
+            <div id="paymentPending">
+                <div class="spinner"></div>
+                <p>Check your phone and enter your M-Pesa PIN to complete payment...</p>
+            </div>
+
+            <div id="paymentSuccess" style="display:none;">
+                <div class="success-icon">&#10004;</div>
+                <p>Payment received! You're enrolled.</p>
+                <button type="button" class="btn btn-primary" id="closeModalBtn">Close</button>
+            </div>
+
+            <div id="paymentFailed" style="display:none;">
+                <p>Payment could not be confirmed. Please try again.</p>
+                <button type="button" class="btn btn-secondary" id="retryModalBtn">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .payment-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .payment-modal {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            max-width: 320px;
+            width: 90%;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            margin: 0 auto 1rem;
+            border: 4px solid #eee;
+            border-top-color: #28a745;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .success-icon {
+            font-size: 2.5rem;
+            color: #28a745;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const courseSelect = document.getElementById('course');
+            const feeDisplay = document.getElementById('feeDisplay');
+            const amountInput = document.getElementById('amount');
+
+            courseSelect.addEventListener('change', function () {
+                const selected = courseSelect.options[courseSelect.selectedIndex];
+                const fee = selected.getAttribute('data-fee') || 0;
+                feeDisplay.textContent = 'Ksh ' + Number(fee).toLocaleString();
+                amountInput.value = fee;
+            });
+
+            const form = document.getElementById('mpesaForm');
+            const modal = document.getElementById('paymentModal');
+            const pendingView = document.getElementById('paymentPending');
+            const successView = document.getElementById('paymentSuccess');
+            const failedView = document.getElementById('paymentFailed');
+
+            let pollTimer = null;
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                if (!courseSelect.value) {
+                    alert('Please select a course first.');
+                    return;
+                }
+
+                // Show modal in "pending" state
+                pendingView.style.display = 'block';
+                successView.style.display = 'none';
+                failedView.style.display = 'none';
+                modal.style.display = 'flex';
+
+                const formData = new FormData(form);
+                const csrfToken = form.querySelector('[name=csrfmiddlewaretoken]').value;
+
+                fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    credentials: 'same-origin',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-CSRFToken': csrfToken
+                    }
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        // Expecting the initiating view to return a checkout_request_id
+                        // once the STK push has been sent by your backend.
+                        if (data.checkout_request_id) {
+                            pollPaymentStatus(data.checkout_request_id);
+                        } else {
+                            showFailed();
+                        }
+                    })
+                    .catch(() => showFailed());
+            });
+
+            function pollPaymentStatus(checkoutId) {
+                pollTimer = setInterval(function () {
+                    fetch(`/payment-status/${checkoutId}/`)
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.status === 'success') {
+                                clearInterval(pollTimer);
+                                showSuccess();
+                            } else if (data.status === 'failed') {
+                                clearInterval(pollTimer);
+                                showFailed();
+                            }
+                            // if 'pending', keep polling
+                        })
+                        .catch(() => {
+                            clearInterval(pollTimer);
+                            showFailed();
+                        });
+                }, 3000);
+
+                // Stop polling after 60s so the user isn't stuck forever
+                setTimeout(() => clearInterval(pollTimer), 60000);
+            }
+
+            function showSuccess() {
+                pendingView.style.display = 'none';
+                successView.style.display = 'block';
+            }
+
+            function showFailed() {
+                pendingView.style.display = 'none';
+                failedView.style.display = 'block';
+            }
+
+            document.getElementById('closeModalBtn').addEventListener('click', function () {
+                modal.style.display = 'none';
+                window.location.reload(); // or redirect to a "my courses" page
+            });
+
+            document.getElementById('retryModalBtn').addEventListener('click', function () {
+                modal.style.display = 'none';
+            });
+        });
+    </script>
+
+    {% endblock %}
+
+    {% include 'footer.html' %}
