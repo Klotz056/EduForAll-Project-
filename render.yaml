@@ -22,6 +22,18 @@ services:
       - key: DEBUG
         value: "False"
       - key: ALLOWED_HOSTS
-        value: "localhost,127.0.0.1,.onrender.com"
+        value: "eduforall-web.onrender.com"
       - key: CSRF_TRUSTED_ORIGINS
         value: "https://eduforall-web.onrender.com"
+      - key: MPESA_ENVIRONMENT
+        value: "sandbox"
+      - key: MPESA_CONSUMER_KEY
+        sync: false
+      - key: MPESA_CONSUMER_SECRET
+        sync: false
+      - key: MPESA_SHORTCODE
+        sync: false
+      - key: MPESA_EXPRESS_SHORTCODE
+        sync: false
+      - key: MPESA_PASSKEY
+        sync: false
