@@ -267,14 +267,19 @@ MPESA_ENVIRONMENT = 'sandbox'
 MPESA_CONSUMER_KEY = 'puxlVbzDKNYKcjAAbXQPgKwhyV3ML8bgHlcZmuQAAB6xZ5O0'
 MPESA_CONSUMER_SECRET = 'eLvDqUeAR1XOWDax9HZiCAEUo7JXMrYHHHXFqzdCrAoAchOxlqHWk0yGtLxOh6To'
 
+MPESA_CONSUMER_KEY = 'eEviRGYAipuViU2AKOfRANqydvGKMIAf0RBa1eddSAe1F7r4'
+MPESA_CONSUMER_SECRET = 'CEM8Vn4PUYI4W1eJXxt37ZLDufrFRALjd9J1C5qoRMERQYy4xHPMZ98HCXhGAaf3'
+
 #Shortcode to use for transactions. For sandbox  use the Shortcode 1 provided on test credentials page
 
+MPESA_SHORTCODE = '174379'
 MPESA_SHORTCODE = '174379'
 
 # Shortcode to use for Lipa na MPESA Online (MPESA Express) transactions
 # This is only used on sandbox, do not set this variable in production
 # For sandbox use the Lipa na MPESA Online Shorcode provided on test credentials page
 
+MPESA_EXPRESS_SHORTCODE = '174379'
 MPESA_EXPRESS_SHORTCODE = '174379'
 
 # Type of shortcode
@@ -289,7 +294,7 @@ MPESA_SHORTCODE_TYPE = 'paybill'
 # Production passkey is sent via email once you go live
 
 MPESA_PASSKEY = 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919'
-
+MPESA_PASSKEY = 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919'
 # Username for initiator (to be used in B2C, B2B, AccountBalance and TransactionStatusQuery Transactions)
 
 MPESA_INITIATOR_USERNAME = 'initiator_username'

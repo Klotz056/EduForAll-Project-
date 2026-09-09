@@ -387,6 +387,16 @@ def enroll_course_view(request, course_id):
         if enrollment_type not in ['free', 'mentored']:
             messages.error(request, 'Invalid enrollment type')
             return redirect('course_detail', course_id=course_id)
+
+        is_paid_enrollment = (
+            course.price > 0
+            and (
+                course.course_type == 'paid'
+                or (course.course_type == 'both' and enrollment_type == 'mentored')
+            )
+        )
+        if is_paid_enrollment:
+            return redirect('pay')
         
         mentor = None
         if enrollment_type == 'mentored' and mentor_id:
@@ -866,3 +876,68 @@ def mpesaPay(request):
             )
 
     return render(request, 'mpesa-payment.html', context)
+
+def donate(request):
+    return render(request, 'schoolApp/donate.html')
+
+# def donate(request):
+#     cl = MpesaClient()
+#     # Use a Safaricom phone number that you have access to, for you to be able to view the prompt.
+#     phone_number = '0711959232'
+#     amount = 1
+#     account_reference = 'EduforAll Donation Foundation'
+#     transaction_desc = 'Donation to EduforAll Foundation for education support and scholarships.'
+#     callback_url = 'https://api.darajambili.com/express-payment'
+#     response = cl.stk_push(phone_number, amount, account_reference, transaction_desc, callback_url)
+#     # return HttpResponse(response)
+#     return render(request, 'schoolApp/donate.html', {'response': response})
+
+def donate(request):
+    cl = MpesaClient()
+    account_reference = 'EduforAll Donation Foundation'
+    transaction_desc = 'Donation to EduforAll Foundation for education support and scholarships.'
+    callback_url = 'https://api.darajambili.com/express-payment'
+
+    if request.method == 'POST':
+        # Read the donor's actual phone number instead of a hardcoded one
+        raw_phone = request.POST.get('phoneNumber')
+        if not raw_phone or str(raw_phone).strip() == "":
+            messages.error(request, "Phone number is required.")
+            return render(request, 'schoolApp/donate.html')
+
+        # Normalize to the format Safaricom requires: 2547XXXXXXXX
+        digits = ''.join(ch for ch in str(raw_phone) if ch.isdigit())
+        if digits.startswith('0') and len(digits) == 10:
+            phone_number = '254' + digits[1:]
+        elif digits.startswith('254') and len(digits) == 12:
+            phone_number = digits
+        elif len(digits) == 9:
+            phone_number = '254' + digits
+        else:
+            phone_number = digits
+
+        if len(phone_number) != 12 or not phone_number.startswith('254'):
+            messages.error(request, "Enter a valid Safaricom number, e.g. 0712345678.")
+            return render(request, 'schoolApp/donate.html')
+
+        # Read the donor's actual amount instead of a hardcoded 1
+        try:
+            amount = int(float(request.POST.get('amount', 0)))
+        except (TypeError, ValueError):
+            amount = 0
+
+        if amount < 1:
+            messages.error(request, "Enter a donation amount of at least Ksh 1.")
+            return render(request, 'schoolApp/donate.html')
+
+        try:
+            response = cl.stk_push(phone_number, amount, account_reference, transaction_desc, callback_url)
+            messages.success(request, "STK Push sent! Please enter your M-Pesa PIN on your phone.")
+        except Exception as e:
+            response = None
+            messages.error(request, f"Transaction error: {str(e)}")
+
+        return render(request, 'schoolApp/donate.html', {'response': response})
+
+    # GET request — just show the empty donation form, no payment triggered
+    return render(request, 'schoolApp/donate.html')
