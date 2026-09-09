@@ -157,7 +157,6 @@ Access Django admin panel at `/admin`:
 ## 🔧 Configuration
 
 ### Settings Location
-Main configuration is in [projectSchools/settings.py](projectSchools/settings.py)
 
 Key settings:
 - `DEBUG`: Set to `False` in production
