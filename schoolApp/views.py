@@ -755,59 +755,10 @@ def newsletter_unsubscribe(request, email):
         newsletter.save()
         messages.success(request, 'You have been unsubscribed from our newsletter')
     except models.Newsletter.DoesNotExist:
-        messages.error(request, 'Email not found')
-    
+        messages.error(request, 'Email not found')   
     return redirect('school')
 
-
-
-# def index(request):
-    # cl = MpesaClient()
-    # # Use a Safaricom phone number that you have access to, for you to be able to view the prompt.
-    # phone_number = '0746781552'
-    # amount = 1
-    # account_reference = 'EduForAll'
-    # transaction_desc = 'Payment for course enrollment'
-    # callback_url = 'https://api.darajambili.com/express-payment'
-    # response = cl.stk_push(phone_number, amount, account_reference, transaction_desc, callback_url)
-    # return render(request, 'mpesa-payment.html')
-
-# 
-# def mpesaPayment(request):
-#     cl = MpesaClient()
-#     account_reference = 'EduForAll'
-#     transaction_desc = 'Payment for course enrollment'
-#     callback_url = 'https://api.darajambili.com/express-payment'
-    
-#     if request.method == 'POST':
-#         # Retrieve input value (or check alternative form input names)
-#         raw_phone = request.POST.get('phone_number') or request.POST.get('phone') or request.POST.get('mobile')
-        
-#         # Guard: Check if phone number is empty or None BEFORE touching Daraja
-#         if not raw_phone or str(raw_phone).strip() == "":
-#             messages.error(request, "Phone number is required.")
-#             return render(request, 'mpesa-payment.html')
-
-#         # Convert to clean string
-#         phone_number = str(raw_phone).strip().replace(" ", "").replace("-", "")
-        
-#         try:
-#             amount = int(float(request.POST.get('amount', 1)))
-            
-#             # Execute STK push only with verified phone string
-#             response = cl.stk_push(phone_number, amount, account_reference, transaction_desc, callback_url)
-            
-#             context = {"response": response}
-#             messages.success(request, "STK Push sent! Please enter your M-Pesa PIN on your phone.")
-#             return render(request, 'mpesa-payment.html', context)
-
-#         except Exception as e:
-#             messages.error(request, f"Transaction error: {str(e)}")
-#             return render(request, 'mpesa-payment.html')
-            
-#     return render(request, 'mpesa-payment.html')
-
-    
+   
 def mpesaPay(request):
     cl = MpesaClient()
     courses = models.Course.objects.filter(
@@ -880,17 +831,6 @@ def mpesaPay(request):
 def donate(request):
     return render(request, 'schoolApp/donate.html')
 
-# def donate(request):
-#     cl = MpesaClient()
-#     # Use a Safaricom phone number that you have access to, for you to be able to view the prompt.
-#     phone_number = '0711959232'
-#     amount = 1
-#     account_reference = 'EduforAll Donation Foundation'
-#     transaction_desc = 'Donation to EduforAll Foundation for education support and scholarships.'
-#     callback_url = 'https://api.darajambili.com/express-payment'
-#     response = cl.stk_push(phone_number, amount, account_reference, transaction_desc, callback_url)
-#     # return HttpResponse(response)
-#     return render(request, 'schoolApp/donate.html', {'response': response})
 
 def donate(request):
     cl = MpesaClient()
@@ -905,7 +845,7 @@ def donate(request):
             messages.error(request, "Phone number is required.")
             return render(request, 'schoolApp/donate.html')
 
-        # Normalize to the format Safaricom requires: 2547XXXXXXXX
+# Normalize to the format Safaricom requires: 2547XXXXXXXX
         digits = ''.join(ch for ch in str(raw_phone) if ch.isdigit())
         if digits.startswith('0') and len(digits) == 10:
             phone_number = '254' + digits[1:]
